@@ -105,8 +105,12 @@ func _on_confirm_pressed():
 	if windowSizeOptionButton.selected != -1:
 		get_window().size.x = windowWidth
 		get_window().size.y = windowHeight
+	
 	# audio
-	# to do - update global volume values
+	Game.masterVolume = masterVolume
+	
+	# Save settings
+	Config.saveConfig()
 
 
 func _on_cancel_pressed():
@@ -183,8 +187,9 @@ func windowSizeSelectCurrent():
 
 
 func audioTabSetup():
-	# to do - get master volume from global value
-	pass
+	masterVolume = Game.masterVolume
+	masterVolumeSlider.value = masterVolume
+	masterVolumeSpin.value = masterVolume
 
 
 
