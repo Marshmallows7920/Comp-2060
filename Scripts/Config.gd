@@ -44,7 +44,6 @@ func loadConfig():
 		var windowMode = videoSettings.window_mode
 		DisplayServer.window_set_mode(videoSettings.window_mode)
 		if videoSettings.has("window_size"):
-			var windowSize = videoSettings.window_size
 			if windowMode != DisplayServer.WINDOW_MODE_FULLSCREEN and windowMode != DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN:
 				get_window().size = videoSettings.window_size
 		else:
