@@ -6,6 +6,8 @@ class_name PlayerStats
 @export var exp: int = 0
 @export var exp_needed: int = 100
 @export var exp_increase_step: int = 25
+signal leveled_up(new_level: int)
+signal exp_changed(exp: int, exp_needed: int)
 
 # Base stats
 @export var base_hp: int = 50
@@ -32,3 +34,18 @@ func def_stat() -> int:
 
 func atk_stat() -> int:
 	return base_atk + level * atk_growth
+	
+# Leveling up
+func add_exp(amount: int) -> void:
+	exp += max(amount, 0)
+
+	while exp >= exp_needed:
+		exp -= exp_needed
+		_level_up()
+
+	exp_changed.emit(exp, exp_needed)
+
+func _level_up() -> void:
+	level += 1
+	exp_needed += exp_increase_step  # increase exp needed for next level
+	leveled_up.emit(level)
