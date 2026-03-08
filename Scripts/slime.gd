@@ -26,6 +26,9 @@ var interestTimer
 var tileMaps
 var tileMap
 
+@export var attackPower:float = 5.0
+@export var damageType:String = "ice"
+
 
 func _ready():
 	closestTileMap()

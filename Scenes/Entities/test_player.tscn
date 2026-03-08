@@ -9,7 +9,7 @@ size = Vector2(14, 14)
 size = Vector2(14, 14)
 orientation = 2
 
-[node name="Player" type="CharacterBody2D" groups=["Player"]]
+[node name="TestPlayer" type="CharacterBody2D" groups=["Player"]]
 collision_mask = 4
 script = ExtResource("1_g642b")
 

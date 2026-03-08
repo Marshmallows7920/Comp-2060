@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://dtqjivm2acj5"]
 
-[ext_resource type="Script" path="res://SlimeAttack1.gd" id="1_e7bek"]
+[ext_resource type="Script" path="res://Scripts/slime_attack_1.gd" id="1_ancbb"]
 [ext_resource type="Texture2D" uid="uid://bdjbm0gwfgj4k" path="res://Sprites/blue_slime.png" id="2_2tsvp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2fibr"]
@@ -190,7 +190,7 @@ _data = {
 }
 
 [node name="SlimeAttack1" type="Area2D" groups=["EnemyAttack"]]
-script = ExtResource("1_e7bek")
+script = ExtResource("1_ancbb")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ielic")
