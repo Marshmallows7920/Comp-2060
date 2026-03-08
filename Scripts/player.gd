@@ -6,17 +6,19 @@ var hp = 100
 
 
 func _physics_process(delta):
-	var directionX = Input.get_axis("move_left", "move_right")
+	var directionX = Input.get_axis("MoveLeft", "MoveRight")
 	if directionX:
-		velocity.x = directionX * SPEED
+		velocity.x = directionX
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.x = 0
 		
-	var directionY = Input.get_axis("move_up", "move_down")
+	var directionY = Input.get_axis("MoveUp", "MoveDown")
 	if directionY:
-		velocity.y = directionY * SPEED
+		velocity.y = directionY
 	else:
-		velocity.y = move_toward(velocity.y, 0, SPEED)
+		velocity.y = 0
+	
+	velocity = velocity.normalized() * SPEED
 	
 	move_and_slide()
 
