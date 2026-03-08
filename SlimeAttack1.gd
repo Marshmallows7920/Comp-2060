@@ -6,6 +6,7 @@ func _ready():
 	print(get_parent())
 	par = get_parent()
 	$AnimatedSprite2D.play("attack_1")
+	$AnimatedSprite2D2.play("attack_1")
 	$AnimationPlayer.play("attack_1")
 
 

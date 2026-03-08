@@ -32,6 +32,81 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_61e1y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionPolygon2D:polygon")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [PackedVector2Array(-12, -4, -12, -2, -11, 0, -10, 1, -9, 1, -8, 0, -7, -1, -7, -2, -9, -3, -11, -4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionPolygon2D2:polygon")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [PackedVector2Array(-1, -10, -3, -6, -3, -4, 1, -4, 1, -7, 0, -10)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionPolygon2D3:polygon")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [PackedVector2Array(10, -5, 8, -4, 6, -2, 6, -1, 8, 0, 9, 0, 10, -2, 11, -3, 11, -5)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionPolygon2D4:polygon")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [PackedVector2Array(-12, -4, -12, -2, -11, 0, -10, 1, -9, 1, -8, 0, -7, -1, -7, -2, -9, -3, -11, -4)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CollisionPolygon2D5:polygon")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [PackedVector2Array(-1, -10, -3, -6, -3, -4, 1, -4, 1, -7, 0, -10)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CollisionPolygon2D6:polygon")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [PackedVector2Array(10, -5, 8, -4, 6, -2, 6, -1, 8, 0, 9, 0, 10, -2, 11, -3, 11, -5)]
+}
+
 [sub_resource type="Animation" id="Animation_4povv"]
 resource_name = "attack_1"
 length = 0.6
@@ -71,44 +146,41 @@ tracks/2/keys = {
 "update": 1,
 "values": [PackedVector2Array(10, -5, 8, -4, 6, -2, 6, -1, 8, 0, 9, 0, 10, -2, 11, -3, 11, -5), PackedVector2Array(11, -6, 9, -5, 8, -4, 8, -3, 9, -2, 10, -2, 12, -4, 12, -6), PackedVector2Array(12, -7, 11, -6, 11, -5, 13, -5, 13, -7)]
 }
-
-[sub_resource type="Animation" id="Animation_61e1y"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CollisionPolygon2D:polygon")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionPolygon2D4:polygon")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [PackedVector2Array(-12, -4, -12, -2, -11, 0, -10, 1, -9, 1, -8, 0, -7, -1, -7, -2, -9, -3, -11, -4)]
+"values": [PackedVector2Array(-12, -4, -12, -2, -11, 0, -10, 1, -9, 1, -8, 0, -7, -1, -7, -2, -9, -3, -11, -4), PackedVector2Array(-14, -5, -14, -4, -13, -2, -12, -1, -10, -1, -10, -2, -11, -4, -12, -5), PackedVector2Array(-15, -7, -16, -7, -16, -6, -15, -5, -14, -5, -14, -6)]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CollisionPolygon2D2:polygon")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CollisionPolygon2D5:polygon")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [PackedVector2Array(-1, -10, -3, -6, -3, -4, 1, -4, 1, -7, 0, -10)]
+"values": [PackedVector2Array(-1, -10, -3, -6, -3, -4, 1, -4, 1, -7, 0, -10), PackedVector2Array(-1, -13, -2, -11, -2, -7, 1, -7, 1, -10, 0, -13), PackedVector2Array(-1, -14, -2, -12, -2, -11, -1, -11, 0, -12, 0, -14)]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("CollisionPolygon2D3:polygon")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CollisionPolygon2D6:polygon")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [PackedVector2Array(10, -5, 8, -4, 6, -2, 6, -1, 8, 0, 9, 0, 10, -2, 11, -3, 11, -5)]
+"values": [PackedVector2Array(10, -5, 8, -4, 6, -2, 6, -1, 8, 0, 9, 0, 10, -2, 11, -3, 11, -5), PackedVector2Array(11, -6, 9, -5, 8, -4, 8, -3, 9, -2, 10, -2, 12, -4, 12, -6), PackedVector2Array(12, -7, 11, -6, 11, -5, 13, -5, 13, -7)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_eyye5"]
@@ -125,19 +197,51 @@ sprite_frames = SubResource("SpriteFrames_ielic")
 animation = &"attack_1"
 frame = 2
 frame_progress = 1.0
+offset = Vector2(0, -3)
+metadata/_edit_lock_ = true
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -3)
+rotation = 3.14159
+sprite_frames = SubResource("SpriteFrames_ielic")
+animation = &"attack_1"
+frame = 2
+frame_progress = 1.0
 offset = Vector2(0.5, -4)
+metadata/_edit_lock_ = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2(0.5, -4)
+position = Vector2(0, -3)
 polygon = PackedVector2Array(-12, -4, -12, -2, -11, 0, -10, 1, -9, 1, -8, 0, -7, -1, -7, -2, -9, -3, -11, -4)
+metadata/_edit_lock_ = true
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="."]
+position = Vector2(-0.5, 1)
+rotation = 3.14159
+polygon = PackedVector2Array(-12, -4, -12, -2, -11, 0, -10, 1, -9, 1, -8, 0, -7, -1, -7, -2, -9, -3, -11, -4)
+metadata/_edit_lock_ = true
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
-position = Vector2(0.5, -4)
+position = Vector2(0, -3)
 polygon = PackedVector2Array(-1, -10, -3, -6, -3, -4, 1, -4, 1, -7, 0, -10)
+metadata/_edit_lock_ = true
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="."]
+position = Vector2(-0.5, 1)
+rotation = 3.14159
+polygon = PackedVector2Array(-1, -10, -3, -6, -3, -4, 1, -4, 1, -7, 0, -10)
+metadata/_edit_lock_ = true
 
 [node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="."]
-position = Vector2(0.5, -4)
+position = Vector2(0, -3)
 polygon = PackedVector2Array(10, -5, 8, -4, 6, -2, 6, -1, 8, 0, 9, 0, 10, -2, 11, -3, 11, -5)
+metadata/_edit_lock_ = true
+
+[node name="CollisionPolygon2D6" type="CollisionPolygon2D" parent="."]
+position = Vector2(-0.5, 1)
+rotation = 3.14159
+polygon = PackedVector2Array(10, -5, 8, -4, 6, -2, 6, -1, 8, 0, 9, 0, 10, -2, 11, -3, 11, -5)
+metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -146,4 +250,5 @@ libraries = {
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="animation_finished" from="AnimatedSprite2D2" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

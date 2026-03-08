@@ -51,6 +51,13 @@ move_down={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_navigation/layer_1="Navigation1"
+2d_physics/layer_2="Enemy"
+2d_physics/layer_3="Obstacles"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
