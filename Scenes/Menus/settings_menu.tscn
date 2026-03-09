@@ -25,8 +25,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ict5l")
-settingsMenu = "res://Scenes/Levels/settings_menu.tscn"
-mainMenu = "res://Scenes/Levels/main_menu.tscn"
+settingsMenu = "res://Scenes/Menus/settings_menu.tscn"
+mainMenu = "res://Scenes/Menus/main_menu.tscn"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1

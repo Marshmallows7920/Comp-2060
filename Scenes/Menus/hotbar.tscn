@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsdn3mc8tt0ex"]
+
+[ext_resource type="PackedScene" uid="uid://del36cuajklsx" path="res://Scenes/Menus/hotbar_slot.tscn" id="1_33i1m"]
+[ext_resource type="Script" path="res://Scripts/hotbar.gd" id="1_xvn15"]
+
+[node name="Hotbar" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xvn15")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 128
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 128
+theme_override_constants/margin_bottom = 64
+
+[node name="SlotContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="HotbarSlot" parent="MarginContainer/SlotContainer" instance=ExtResource("1_33i1m")]
+layout_mode = 2
+
+[node name="HotbarSlot2" parent="MarginContainer/SlotContainer" instance=ExtResource("1_33i1m")]
+layout_mode = 2
+
+[node name="HotbarSlot3" parent="MarginContainer/SlotContainer" instance=ExtResource("1_33i1m")]
+layout_mode = 2
+
+[node name="HotbarSlot4" parent="MarginContainer/SlotContainer" instance=ExtResource("1_33i1m")]
+layout_mode = 2

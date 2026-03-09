@@ -4,6 +4,19 @@ extends CharacterBody2D
 const SPEED = 100.0
 var hp = 100
 
+#hotbar variables
+@onready var hotbar = $CanvasLayer/Hotbar
+@export var numSpellSlots:int = 2
+const MAX_SPELL_SLOTS = 4
+var spellSlots = ["fireball", "icicle"]
+var slotSelected = 0
+@export_file("*.tscn") var hotbarSlotScene:String
+
+
+func _ready():
+	pass
+
+
 
 func _physics_process(delta):
 	var directionX = Input.get_axis("MoveLeft", "MoveRight")
