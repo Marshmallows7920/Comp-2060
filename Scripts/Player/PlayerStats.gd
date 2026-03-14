@@ -15,7 +15,7 @@ signal exp_changed(exp: int, exp_needed: int)
 @export var base_atk: int = 10
 @export var base_move_speed: float = 200.0
 
-# Growth (temporary; class system later)
+# Growth 
 @export var hp_growth: int = 5
 @export var def_growth: int = 2
 @export var atk_growth: int = 3
