@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://0utldmimq5j7"]
 
-[ext_resource type="Script" path="res://Scripts/Weapon/Shotgun.gd" id="1_oieyy"]
+[ext_resource type="Script" path="res://Scripts/Weapon/ExplosiveStaff.gd" id="1_n3c1a"]
 
-[node name="Shotgun" type="Node2D"]
-script = ExtResource("1_oieyy")
+[node name="ExplosiveStaff" type="Node2D"]
+script = ExtResource("1_n3c1a")
 
 [node name="Muzzle" type="Marker2D" parent="."]
 position = Vector2(1, 0)
