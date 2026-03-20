@@ -6,16 +6,22 @@ var hp = 100
 
 #hotbar variables
 @onready var hotbar = $CanvasLayer/Hotbar
-@export var numSpellSlots:int = 2
+@export var numSpellSlots:int = 5
 const MAX_SPELL_SLOTS = 4
-var spellSlots = ["fireball", "icicle", "", ""]
+var spellSlots #= ["fireball", "icicle", "", ""]
 var slotSelected = 1
 @export_file("*.tscn") var hotbarSlotScene:String
+
+@export_file("*.tscn") var fireball:String
 
 
 func _ready():
 	numSpellSlots = clampi(numSpellSlots, 1, MAX_SPELL_SLOTS)
-	updateHotbar()
+	spellSlots = []
+	for i in range(1, MAX_SPELL_SLOTS+1):
+		spellSlots.append("")
+	slotSelected = clampi(slotSelected, 1, numSpellSlots)
+	hotbar.update(numSpellSlots, spellSlots, slotSelected)
 
 
 func _process(delta):
@@ -25,11 +31,13 @@ func _process(delta):
 				slotSelected = i
 	if Input.is_action_just_pressed("NextSlot"):
 		slotSelected = wrapi(slotSelected+1, 1, numSpellSlots+1)
-		print(slotSelected)
 	elif Input.is_action_just_pressed("PrevSlot"):
 		slotSelected = wrapi(slotSelected-1, 1, numSpellSlots+1)
-		print(slotSelected)
-	updateHotbar()
+	hotbar.update(numSpellSlots, spellSlots, slotSelected)
+	
+	if Input.is_action_just_pressed("Attack"):
+			var dir = (get_global_mouse_position() - position).normalized()
+			spawnFireball(position, dir)
 
 
 
@@ -51,13 +59,11 @@ func _physics_process(delta):
 	move_and_slide()
 
 
-
-func updateHotbar():
-	if hotbar != null:
-		hotbar.update(numSpellSlots, spellSlots, slotSelected)
-	else:
-		print("NO HOTBAR!")
-
+func spawnFireball(pos, dir):
+	var newFireball = load(fireball).instantiate()
+	newFireball.global_position = pos
+	newFireball.setDirection(dir)
+	get_tree().root.add_child(newFireball)
 
 
 func attacked(type:String, power:int):

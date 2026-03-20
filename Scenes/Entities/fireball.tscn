@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://cnxcnhn1e7d5l"]
+
+[ext_resource type="Shader" uid="uid://c3agafqnsyd7k" path="res://Materials/fireball.tres" id="1_4m45x"]
+[ext_resource type="Script" path="res://Scenes/Entities/fireball.gd" id="1_kihqd"]
+[ext_resource type="Texture2D" uid="uid://c5a1guvbqbirj" path="res://Sprites/Fireball_outline.png" id="1_t7bsi"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bc36e"]
+shader = ExtResource("1_4m45x")
+
+[node name="Fireball" type="Area2D"]
+collision_layer = 8
+collision_mask = 6
+script = ExtResource("1_kihqd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_bc36e")
+rotation = 4.71239
+texture = ExtResource("1_t7bsi")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(14, 2, 9, 7, 5, 7, -8, 1, -8, -1, 5, -7, 9, -7, 14, -2)
