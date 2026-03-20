@@ -1,0 +1,28 @@
+extends AspectRatioContainer
+
+@export_file("*.stylebox") var selected_style:String
+@export_file("*.stylebox") var not_selected_style:String
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+
+func set_num(num):
+	$PanelContainer/SlotNumber.text = str(num)
+
+func set_sprite(sprite):
+	$PanelContainer/TextureRect.texture = sprite
+
+func outline(is_selected):
+	if is_selected:
+		$PanelContainer.add_theme_stylebox_override("panel", load(selected_style))
+		if custom_minimum_size == Vector2.ZERO:
+			custom_minimum_size = size * 1.25
+	else:
+		$PanelContainer.add_theme_stylebox_override("panel", load(not_selected_style))
+		custom_minimum_size = Vector2.ZERO
