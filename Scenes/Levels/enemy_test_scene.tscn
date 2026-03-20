@@ -29,7 +29,7 @@ texture = ExtResource("3_fgdoa")
 
 [sub_resource type="TileSet" id="TileSet_y7mnj"]
 physics_layer_0/collision_layer = 4
-physics_layer_0/collision_mask = 3
+physics_layer_0/collision_mask = 11
 navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_i70w8")
 
