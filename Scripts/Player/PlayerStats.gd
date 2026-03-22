@@ -4,20 +4,26 @@ class_name PlayerStats
 @export var level: int = 1
 
 @export var base_hp: int = 50
+@export var base_mana: int = 30
 @export var base_def: int = 5
 @export var base_atk: int = 10
-@export var base_move_speed: float = 200.0
+@export var base_move_speed: float = 100.0
 
 @export var hp_growth: int = 5
+@export var mana_growth: int = 3
 @export var def_growth: int = 2
 @export var atk_growth: int = 3
 
+@export var damage_type: String = DamageCalculator.TYPE_MAGIC
+
 var current_hp: int
+var current_mana: int
 var modifiers: Array[StatModifier] = []
 
 
 func _ready() -> void:
 	current_hp = max_hp()
+	current_mana = max_mana()
 
 
 func update_modifiers(delta: float) -> void:
@@ -34,6 +40,7 @@ func update_modifiers(delta: float) -> void:
 				modifiers.remove_at(i)
 
 	current_hp = min(current_hp, max_hp())
+	current_mana = min(current_mana, max_mana())
 
 
 func add_modifier(modifier: StatModifier) -> void:
@@ -45,6 +52,7 @@ func add_modifier(modifier: StatModifier) -> void:
 	modifiers.append(new_modifier)
 
 	current_hp = min(current_hp, max_hp())
+	current_mana = min(current_mana, max_mana())
 
 
 func remove_modifier(modifier_id: String) -> void:
@@ -53,6 +61,7 @@ func remove_modifier(modifier_id: String) -> void:
 			modifiers.remove_at(i)
 
 	current_hp = min(current_hp, max_hp())
+	current_mana = min(current_mana, max_mana())
 
 
 func get_hp_bonus() -> int:
@@ -87,6 +96,10 @@ func max_hp() -> int:
 	return base_hp + level * hp_growth + get_hp_bonus()
 
 
+func max_mana() -> int:
+	return base_mana + level * mana_growth
+
+
 func atk_stat() -> int:
 	return base_atk + level * atk_growth + get_atk_bonus()
 
@@ -108,8 +121,28 @@ func heal(amount: int) -> int:
 	return current_hp - old_hp
 
 
-func take_damage(amount: int) -> int:
-	var final_damage: int = max(1, amount - def_stat())
+func restore_mana(amount: int) -> int:
+	if amount <= 0:
+		return 0
+
+	var old_mana: int = current_mana
+	current_mana = min(current_mana + amount, max_mana())
+	return current_mana - old_mana
+
+
+func use_mana(amount: int) -> bool:
+	if amount <= 0:
+		return true
+
+	if current_mana < amount:
+		return false
+
+	current_mana -= amount
+	return true
+
+
+func take_damage(amount: int, attack_type: String = DamageCalculator.TYPE_MAGIC) -> int:
+	var final_damage: int = DamageCalculator.calculate_damage(amount, def_stat(), attack_type, damage_type)
 	current_hp -= final_damage
 	current_hp = max(current_hp, 0)
 	return final_damage
