@@ -2,44 +2,25 @@ extends Weapon
 
 @onready var muzzle: Marker2D = $Muzzle
 
-
-func attack(direction: Vector2, base_damage: int) -> void:
+func attack(direction: Vector2, base_damage: int, attack_type: String = DamageCalculator.TYPE_MAGIC) -> void:
 	if !can_fire:
 		return
-	
+
 	if bullet_scene == null:
 		return
-	
+
 	start_cooldown()
 
-	var dir = direction.normalized()
+	var dir := direction.normalized()
+	var shooter_ref = get_parent().get_parent()
+	var spawn_pos = muzzle.global_position + dir * 20
+	var angles := [-20, -10, 0, 10, 20]
 
-	var bullet1 = bullet_scene.instantiate()
-	bullet1.global_position = muzzle.global_position
-	bullet1.direction = dir.rotated(deg_to_rad(-20))
-	bullet1.damage = get_final_damage(base_damage)
-	get_tree().current_scene.add_child(bullet1)
-
-	var bullet2 = bullet_scene.instantiate()
-	bullet2.global_position = muzzle.global_position
-	bullet2.direction = dir.rotated(deg_to_rad(-10))
-	bullet2.damage = get_final_damage(base_damage)
-	get_tree().current_scene.add_child(bullet2)
-
-	var bullet3 = bullet_scene.instantiate()
-	bullet3.global_position = muzzle.global_position
-	bullet3.direction = dir
-	bullet3.damage = get_final_damage(base_damage)
-	get_tree().current_scene.add_child(bullet3)
-
-	var bullet4 = bullet_scene.instantiate()
-	bullet4.global_position = muzzle.global_position
-	bullet4.direction = dir.rotated(deg_to_rad(10))
-	bullet4.damage = get_final_damage(base_damage)
-	get_tree().current_scene.add_child(bullet4)
-
-	var bullet5 = bullet_scene.instantiate()
-	bullet5.global_position = muzzle.global_position
-	bullet5.direction = dir.rotated(deg_to_rad(20))
-	bullet5.damage = get_final_damage(base_damage)
-	get_tree().current_scene.add_child(bullet5)
+	for angle in angles:
+		var bullet = bullet_scene.instantiate()
+		bullet.global_position = spawn_pos
+		bullet.direction = dir.rotated(deg_to_rad(angle))
+		bullet.damage = get_final_damage(base_damage)
+		bullet.attack_type = attack_type
+		bullet.shooter = shooter_ref
+		get_tree().current_scene.add_child(bullet)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bt22htiyrymw7"]
+[gd_scene load_steps=32 format=3 uid="uid://bt22htiyrymw7"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_t6nyq"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStats.gd" id="2_c4w7p"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://dqlhjwok8yot5" path="res://Sprites/Player sprite/Walking/0_Dark_Oracle_Walking_009.png" id="12_fslwu"]
 [ext_resource type="Texture2D" uid="uid://bwrra4mvn2y87" path="res://Sprites/Player sprite/Walking/0_Dark_Oracle_Walking_003.png" id="13_3uyx5"]
 [ext_resource type="Script" path="res://Scripts/Item/Inventory.gd" id="15_g2x1t"]
+[ext_resource type="PackedScene" uid="uid://bt1y6kfs1j0mc" path="res://Scenes/Weapon/ApprenticeStaff.tscn" id="16_fk68p"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mm73t"]
 atlas = ExtResource("2_tvde2")
@@ -88,10 +89,13 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fiida")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mm73t")
 }],
-"loop": true,
+"loop": false,
 "name": &"Attack",
-"speed": 5.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -106,7 +110,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0fgrm")
 }],
-"loop": true,
+"loop": false,
 "name": &"Die",
 "speed": 5.0
 }, {
@@ -125,18 +129,37 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_sr51o"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e03rg"]
+size = Vector2(90, 115)
 
 [node name="Player" type="CharacterBody2D"]
+scale = Vector2(0.2, 0.2)
 script = ExtResource("1_t6nyq")
 
+[node name="UIAnchor" type="Node2D" parent="."]
+scale = Vector2(1, 1)
+
+[node name="HPBar" type="ProgressBar" parent="UIAnchor"]
+offset_left = -55.0
+offset_top = -135.0
+offset_right = 55.0
+offset_bottom = -108.0
+
+[node name="ManaBar" type="ProgressBar" parent="UIAnchor"]
+offset_left = -55.0
+offset_top = -105.0
+offset_right = 55.0
+offset_bottom = -78.0
+
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 5)
+scale = Vector2(0.2, 0.205556)
 sprite_frames = SubResource("SpriteFrames_1oqfe")
-animation = &"Walk"
-frame_progress = 0.48881
+animation = &"Attack"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_sr51o")
+position = Vector2(-5, 10)
+shape = SubResource("RectangleShape2D_e03rg")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -147,3 +170,5 @@ script = ExtResource("2_c4w7p")
 script = ExtResource("15_g2x1t")
 
 [node name="WeaponHolder" type="Node2D" parent="."]
+
+[node name="ApprenticeStaff" parent="WeaponHolder" instance=ExtResource("16_fk68p")]
