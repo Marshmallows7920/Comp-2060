@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="StatModifier" load_steps=2 format=3 uid="uid://cxrx8hxmycpxh"]
+
+[ext_resource type="Script" path="res://Scripts/Player/StatModifier.gd" id="1_rkhon"]
+
+[resource]
+script = ExtResource("1_rkhon")
+id = ""
+hp_bonus = 0
+atk_bonus = 0
+def_bonus = 0
+speed_bonus = 10.0
+duration = 30.0
+tick_interval = 0.0
+hp_per_tick = 0

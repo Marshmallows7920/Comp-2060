@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="HealItem" load_steps=2 format=3 uid="uid://dchq8t73ohqnw"]
+
+[ext_resource type="Script" path="res://Scripts/Item/HealItem.gd" id="1_to624"]
+
+[resource]
+script = ExtResource("1_to624")
+heal_amount = 20
+item_name = "Small Potion"
+description = ""
