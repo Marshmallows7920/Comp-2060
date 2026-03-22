@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bt22htiyrymw7"]
+[gd_scene load_steps=35 format=3 uid="uid://bt22htiyrymw7"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_t6nyq"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStats.gd" id="2_c4w7p"]
@@ -16,6 +16,13 @@
 [ext_resource type="Texture2D" uid="uid://bwrra4mvn2y87" path="res://Sprites/Player sprite/Walking/0_Dark_Oracle_Walking_003.png" id="13_3uyx5"]
 [ext_resource type="Script" path="res://Scripts/Item/Inventory.gd" id="15_g2x1t"]
 [ext_resource type="PackedScene" uid="uid://bt1y6kfs1j0mc" path="res://Scenes/Weapon/ApprenticeStaff.tscn" id="16_fk68p"]
+[ext_resource type="PackedScene" uid="uid://bsdn3mc8tt0ex" path="res://Scenes/Menus/hotbar.tscn" id="17_8rva6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nwl4u"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hj7mx"]
+bg_color = Color(0, 0.498039, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mm73t"]
 atlas = ExtResource("2_tvde2")
@@ -134,22 +141,25 @@ size = Vector2(90, 115)
 
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(0.2, 0.2)
+collision_mask = 4
 script = ExtResource("1_t6nyq")
+fireball = "res://Scenes/Objects/fireball.tscn"
 
 [node name="UIAnchor" type="Node2D" parent="."]
-scale = Vector2(1, 1)
 
 [node name="HPBar" type="ProgressBar" parent="UIAnchor"]
 offset_left = -55.0
 offset_top = -135.0
 offset_right = 55.0
 offset_bottom = -108.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_nwl4u")
 
 [node name="ManaBar" type="ProgressBar" parent="UIAnchor"]
 offset_left = -55.0
 offset_top = -105.0
 offset_right = 55.0
 offset_bottom = -78.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_hj7mx")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 5)
@@ -162,6 +172,7 @@ position = Vector2(-5, 10)
 shape = SubResource("RectangleShape2D_e03rg")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
 
 [node name="Stats" type="Node" parent="."]
 script = ExtResource("2_c4w7p")
@@ -172,3 +183,7 @@ script = ExtResource("15_g2x1t")
 [node name="WeaponHolder" type="Node2D" parent="."]
 
 [node name="ApprenticeStaff" parent="WeaponHolder" instance=ExtResource("16_fk68p")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Hotbar" parent="CanvasLayer" instance=ExtResource("17_8rva6")]

@@ -1,6 +1,7 @@
 extends Control
 
 @export_file("*.tscn") var settingsMenu:String
+@export_file("*.tscn") var startLevel:String
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -13,7 +14,7 @@ func _process(delta):
 
 
 func _on_start_pressed():
-	pass # Replace with function body.
+	get_tree().change_scene_to_file(startLevel)
 
 
 func _on_settings_pressed():
