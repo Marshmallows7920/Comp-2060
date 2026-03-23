@@ -7,13 +7,13 @@ class_name PlayerStats
 @export var experience_step:int = 100
 
 @export var base_hp: int = 50
-@export var base_mana: int = 30
+@export var base_mana: int = 50
 @export var base_def: int = 5
 @export var base_atk: int = 10
 @export var base_move_speed: float = 100.0
 
 @export var hp_growth: int = 5
-@export var mana_growth: int = 3
+@export var mana_growth: int = 5
 @export var def_growth: int = 2
 @export var atk_growth: int = 3
 

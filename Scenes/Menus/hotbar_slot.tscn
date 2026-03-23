@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://del36cuajklsx"]
+[gd_scene load_steps=3 format=3 uid="uid://del36cuajklsx"]
 
-[ext_resource type="Texture2D" uid="uid://di7owah62imbp" path="res://icon.svg" id="1_a0yun"]
 [ext_resource type="Script" path="res://Scripts/hotbar_slot.gd" id="1_htpf8"]
 [ext_resource type="StyleBox" uid="uid://cn428uk6xlisg" path="res://Styles/hotbar_slot_panel_selected.stylebox" id="2_j1wd2"]
 
 [node name="HotbarSlot" type="AspectRatioContainer"]
+custom_minimum_size = Vector2(128, 128)
 offset_right = 144.0
 offset_bottom = 144.0
 size_flags_horizontal = 4
@@ -19,7 +19,6 @@ theme_override_styles/panel = ExtResource("2_j1wd2")
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer"]
 layout_mode = 2
-texture = ExtResource("1_a0yun")
 
 [node name="SlotNumber" type="Label" parent="PanelContainer"]
 layout_mode = 2

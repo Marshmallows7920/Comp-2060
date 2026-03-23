@@ -1,5 +1,6 @@
 extends Area2D
 
+
 var playerStats
 var par
 var speed
@@ -20,13 +21,12 @@ func setDirection(dir):
 	rotation = direction.angle()
 
 
-
 func _on_body_entered(body):
 	if body.is_in_group("TileMap"):
 		queue_free()
 		#print("hit wall")
 	elif body.is_in_group("Enemy"):
-		body.attacked(playerStats.atk_stat(), "fire", par)
+		body.attacked(playerStats.atk_stat(), "ice", par)
 		print("Hit Enemy")
 		queue_free()
 

@@ -41,11 +41,11 @@ func _ready():
 
 func _process(delta):
 	var custom_time = sprite.material.get_shader_parameter("custom_time")
-	print(custom_time)
 	if custom_time+delta >= 1.0:
 		sprite.material.set_shader_parameter("custom_time", 1.0)
 	else:
 		sprite.material.set_shader_parameter("custom_time", custom_time+delta)
+
 
 func _physics_process(delta):
 	match state:
@@ -233,6 +233,10 @@ func attacked(amount:int, type:String, attacker:Node):
 	if amount * multiplier > 0:
 		hp -= amount * multiplier
 		sprite.material.set_shader_parameter("custom_time", 0)
+		if attacker.is_in_group("Player"):
+			target = attacker
+			#print("Attack %s" % body)
+			state = "chase"
 	if hp <=0:
 		attacker.killedEnemy(experience)
 		queue_free()
