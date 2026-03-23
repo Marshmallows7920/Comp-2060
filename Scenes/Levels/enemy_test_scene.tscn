@@ -48,7 +48,7 @@ layer_1/tile_data = PackedInt32Array(-458767, 0, 0, -393231, 0, 0, -327695, 0, 0
 script = ExtResource("2_s1omp")
 
 [node name="Player" parent="." groups=["Player"] instance=ExtResource("5_a6vag")]
-position = Vector2(997, 539)
+position = Vector2(960, 541)
 
 [node name="Slime" parent="." instance=ExtResource("1_w6axi")]
 position = Vector2(840, 464)
