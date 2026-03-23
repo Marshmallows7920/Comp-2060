@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://0rongwlqodxx"]
 
-[ext_resource type="PackedScene" uid="uid://pjrq1rdub88u" path="res://Scenes/Entities/ice_slime.tscn" id="1_w6axi"]
+[ext_resource type="PackedScene" uid="uid://pjrq1rdub88u" path="res://Scenes/Enemies/ice_slime.tscn" id="1_w6axi"]
 [ext_resource type="Script" path="res://Scripts/tile_map_navigation.gd" id="2_s1omp"]
 [ext_resource type="Texture2D" uid="uid://ckiro3pafu5mc" path="res://Sprites/TilemapNav.png" id="3_fgdoa"]
 [ext_resource type="PackedScene" uid="uid://bt22htiyrymw7" path="res://Scenes/Character/Player.tscn" id="5_a6vag"]
