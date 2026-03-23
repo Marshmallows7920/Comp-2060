@@ -1,5 +1,7 @@
 extends AspectRatioContainer
 
+@onready var panel = $PanelContainer
+
 @export_file("*.stylebox") var selected_style:String
 @export_file("*.stylebox") var not_selected_style:String
 
@@ -33,3 +35,7 @@ func outline(is_selected):
 	else:
 		$PanelContainer.add_theme_stylebox_override("panel", load(not_selected_style))
 		custom_minimum_size = default_size
+
+
+func update_cooldown():
+	panel.material = ShaderMaterial.new()

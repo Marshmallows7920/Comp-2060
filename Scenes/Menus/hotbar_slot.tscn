@@ -1,7 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://del36cuajklsx"]
+[gd_scene load_steps=5 format=3 uid="uid://del36cuajklsx"]
 
 [ext_resource type="Script" path="res://Scripts/hotbar_slot.gd" id="1_htpf8"]
 [ext_resource type="StyleBox" uid="uid://cn428uk6xlisg" path="res://Styles/hotbar_slot_panel_selected.stylebox" id="2_j1wd2"]
+[ext_resource type="Shader" path="res://Shaders/hotbar_slot_cooldown.gdshader" id="2_tc0l6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jlpn0"]
+shader = ExtResource("2_tc0l6")
+shader_parameter/cooldown = null
 
 [node name="HotbarSlot" type="AspectRatioContainer"]
 custom_minimum_size = Vector2(128, 128)
@@ -14,6 +19,7 @@ selected_style = "res://Styles/hotbar_slot_panel_selected.stylebox"
 not_selected_style = "res://Styles/hotbar_slot_panel_not_selected.stylebox"
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
+material = SubResource("ShaderMaterial_jlpn0")
 layout_mode = 2
 theme_override_styles/panel = ExtResource("2_j1wd2")
 

@@ -13,7 +13,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	update_cooldown_shaders()
 
 
 func update(num_slots, slots, selected, cooldowns):
@@ -63,3 +63,6 @@ func clear_default():
 		for node in slotContainer.get_children():
 			node.queue_free()
 		cleared = true
+
+func update_cooldown_shaders():
+	pass
