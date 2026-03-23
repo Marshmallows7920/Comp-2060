@@ -158,7 +158,7 @@ func is_dead() -> bool:
 func exp_gained(amount:int):
 	experience += amount
 	while(check_level_up()):
-		#call stuff that happens on level up here
+		get_parent().level_up()
 		pass
 
 
