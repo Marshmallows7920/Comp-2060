@@ -41,14 +41,14 @@ func _ready() -> void:
 
 
 func _process(delta):
-	for i in range(1,spells.num_slots+1):
-		if Input.is_action_just_pressed("Slot"+str(i)):
+	for i in range(0,spells.num_slots):
+		if Input.is_action_just_pressed("Slot"+str(i+1)):
 			if spells.num_slots >= i:
 				spells.selected = i-1
 	if Input.is_action_just_pressed("NextSlot"):
-		spells.selected = wrapi(spells.selected+1, 0, spells.num_slots+1)
+		spells.selected = wrapi(spells.selected+1, 0, spells.num_slots)
 	elif Input.is_action_just_pressed("PrevSlot"):
-		spells.selected = wrapi(spells.selected-1, 0, spells.num_slots+1)
+		spells.selected = wrapi(spells.selected-1, 0, spells.num_slots)
 	
 	for i in range(0, spells.cooldowns.size()):
 		spells.cooldowns[i] = spells.cooldowns[i] - delta
