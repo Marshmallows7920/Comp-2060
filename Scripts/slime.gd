@@ -31,7 +31,7 @@ var tileMap
 @export var damageType:String = "ice"
 
 @export var hp:int = 50
-@export var experience:int = 10
+@export var experience:int = 100
 
 func _ready():
 	closestTileMap()

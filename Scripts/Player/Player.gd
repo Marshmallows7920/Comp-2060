@@ -29,10 +29,7 @@ func _ready() -> void:
 		spells.slots.append("")
 		spells.cooldowns.append(0.0)
 	spells.selected = clampi(spells.selected, 0, spells.num_slots-1)
-	get_tree().paused = true
-	var spell_select_menu = load(spell_level_up_menu).instantiate()
-	spell_select_menu.spells = spells
-	hud.add_child(spell_select_menu)
+	level_up()
 	hotbar.update(spells.num_slots, spells.slots, spells.selected, spells.cooldowns)
 	
 	if weapon_holder.get_child_count() > 0:
@@ -240,3 +237,9 @@ func spawn_boulder(pos, dir):
 
 func killedEnemy(experience):
 	stats.exp_gained(experience)
+
+func level_up():
+	get_tree().paused = true
+	var spell_select_menu = load(spell_level_up_menu).instantiate()
+	spell_select_menu.spells = spells
+	hud.add_child(spell_select_menu)
