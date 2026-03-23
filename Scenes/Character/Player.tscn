@@ -184,13 +184,13 @@ script = ExtResource("15_g2x1t")
 
 [node name="Spells" type="Node" parent="."]
 script = ExtResource("16_vvgb8")
-fireball = "res://Scenes/Objects/fireball.tscn"
+fireball = "res://Scenes/Spells/fireball.tscn"
 fireball_sprite = "res://Sprites/Spells/Fireball_outline.png"
 fireball_shader = "res://Shaders/fireball.tres"
-icicle = "res://Scenes/Objects/icicle.tscn"
+icicle = "res://Scenes/Spells/icicle.tscn"
 icicle_sprite = "res://Sprites/Spells/Icicle_outline.png"
 icicle_shader = "res://Shaders/icicle.tres"
-boulder = "res://Scenes/Objects/boulder.tscn"
+boulder = "res://Scenes/Spells/boulder.tscn"
 boulder_sprite = "res://Sprites/Spells/Boulder_outline.png"
 boulder_shader = "res://Shaders/boulder.tres"
 
