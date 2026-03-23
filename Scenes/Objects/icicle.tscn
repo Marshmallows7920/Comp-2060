@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://cu83ghasc1km0"]
+
+[ext_resource type="Texture2D" uid="uid://bk3n20yu1stoi" path="res://Sprites/Spells/Icicle_outline.png" id="1_34doj"]
+[ext_resource type="Shader" uid="uid://c671eodr50kjb" path="res://Shaders/icicle.tres" id="1_v36b2"]
+[ext_resource type="Script" path="res://Scripts/icicle.gd" id="1_w20u6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sdswy"]
+shader = ExtResource("1_v36b2")
+
+[node name="Icicle" type="Area2D"]
+scale = Vector2(0.5, 0.5)
+collision_layer = 8
+collision_mask = 6
+script = ExtResource("1_w20u6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_sdswy")
+texture = ExtResource("1_34doj")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(-16, 0, -1, -7, 1, -7, 16, 0, 1, 7, -1, 7)
+
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

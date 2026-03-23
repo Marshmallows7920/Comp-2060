@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+@export_file("*.tscn") var settingsMenu:String
+@export_file("*.tscn") var spell_level_up_menu:String
+
 @onready var weapon_holder: Node2D = $WeaponHolder
 @onready var stats: PlayerStats = $Stats
 @onready var anim: AnimatedSprite2D = $Sprite
@@ -8,26 +11,29 @@ extends CharacterBody2D
 @onready var hp_bar: ProgressBar = $UIAnchor/HPBar
 @onready var mana_bar: ProgressBar = $UIAnchor/ManaBar
 
+@onready var hud = $HUD
 @onready var hotbar = $HUD/Hotbar
+@onready var spells = $Spells
 
 var equipped_weapon: Weapon = null
 var facing_direction: Vector2 = Vector2.RIGHT
 var is_dead: bool = false
 
-@export var numSpellSlots:int = 2
-const MAX_SPELL_SLOTS = 4
-var spellSlots #= ["fireball", "icicle", "", ""]
-var slotSelected = 1
-
-@export_file("*.tscn") var fireball:String
 
 func _ready() -> void:
-	numSpellSlots = clampi(numSpellSlots, 1, MAX_SPELL_SLOTS)
-	spellSlots = []
-	for i in range(1, MAX_SPELL_SLOTS+1):
-		spellSlots.append("")
-	slotSelected = clampi(slotSelected, 1, numSpellSlots)
-	hotbar.update(numSpellSlots, spellSlots, slotSelected)
+	hotbar.spells = spells
+	spells.num_slots = clampi(spells.num_slots, 0, spells.MAX_SLOTS-1)
+	spells.slots = []
+	spells.cooldowns = []
+	for i in range(0, spells.MAX_SLOTS):
+		spells.slots.append("")
+		spells.cooldowns.append(0.0)
+	spells.selected = clampi(spells.selected, 0, spells.num_slots-1)
+	get_tree().paused = true
+	var spell_select_menu = load(spell_level_up_menu).instantiate()
+	spell_select_menu.spells = spells
+	hud.add_child(spell_select_menu)
+	hotbar.update(spells.num_slots, spells.slots, spells.selected, spells.cooldowns)
 	
 	if weapon_holder.get_child_count() > 0:
 		var first_child: Node = weapon_holder.get_child(0)
@@ -38,19 +44,28 @@ func _ready() -> void:
 
 
 func _process(delta):
-	for i in range(1,numSpellSlots+1):
+	for i in range(1,spells.num_slots+1):
 		if Input.is_action_just_pressed("Slot"+str(i)):
-			if numSpellSlots >= i:
-				slotSelected = i
+			if spells.num_slots >= i:
+				spells.selected = i-1
 	if Input.is_action_just_pressed("NextSlot"):
-		slotSelected = wrapi(slotSelected+1, 1, numSpellSlots+1)
+		spells.selected = wrapi(spells.selected+1, 0, spells.num_slots+1)
 	elif Input.is_action_just_pressed("PrevSlot"):
-		slotSelected = wrapi(slotSelected-1, 1, numSpellSlots+1)
-	hotbar.update(numSpellSlots, spellSlots, slotSelected)
+		spells.selected = wrapi(spells.selected-1, 0, spells.num_slots+1)
+	
+	for i in range(0, spells.cooldowns.size()):
+		spells.cooldowns[i] = spells.cooldowns[i] - delta
+		#print("CD: " + str(spells.cooldowns[i]))
+	
+	hotbar.update(spells.num_slots, spells.slots, spells.selected, spells.cooldowns)
 	
 	if Input.is_action_just_pressed("Attack"):
-			var dir = (get_global_mouse_position() - position).normalized()
-			spawnFireball(position, dir)
+			cast_spell()
+			
+	if Input.is_action_just_pressed("Escape"):
+			get_tree().paused = true
+			var settings = load(settingsMenu).instantiate()
+			hud.add_child(settings)
 
 
 
@@ -171,13 +186,56 @@ func die() -> void:
 	anim.stop()
 
 
-func spawnFireball(pos, dir):
-	var newFireball = load(fireball).instantiate()
+func cast_spell():
+	match spells.slots[spells.selected]:
+		"fireball":
+			if spells.cooldowns[spells.selected] <= 0.0 and stats.current_mana >= spells.fireball_mana_cost:
+				var dir = (get_global_mouse_position() - position).normalized()
+				spawn_fireball(position, dir)
+				spells.cooldowns[spells.selected] = spells.fireball_cooldown
+				stats.current_mana -= spells.fireball_mana_cost
+		"icicle":
+			if spells.cooldowns[spells.selected] <= 0.0 and stats.current_mana >= spells.icicle_mana_cost:
+				var dir = (get_global_mouse_position() - position).normalized()
+				spawn_icicle(position, dir)
+				spells.cooldowns[spells.selected] = spells.icicle_cooldown
+				stats.current_mana -= spells.icicle_mana_cost
+		"boulder":
+			if spells.cooldowns[spells.selected] <= 0.0 and stats.current_mana >= spells.boulder_mana_cost:
+				var dir = (get_global_mouse_position() - position).normalized()
+				spawn_boulder(position, dir)
+				spells.cooldowns[spells.selected] = spells.boulder_cooldown
+				stats.current_mana -= spells.boulder_mana_cost
+
+
+func spawn_fireball(pos, dir):
+	var newFireball = load(spells.fireball).instantiate()
 	newFireball.global_position = pos
 	newFireball.setDirection(dir)
 	newFireball.par = self
 	newFireball.playerStats = stats
+	newFireball.speed = spells.fireball_speed
 	get_tree().root.add_child(newFireball)
+
+
+func spawn_icicle(pos, dir):
+	var newIcicle = load(spells.icicle).instantiate()
+	newIcicle.global_position = pos
+	newIcicle.setDirection(dir)
+	newIcicle.par = self
+	newIcicle.playerStats = stats
+	newIcicle.speed = spells.icicle_speed
+	get_tree().root.add_child(newIcicle)
+
+
+func spawn_boulder(pos, dir):
+	var newBoulder = load(spells.boulder).instantiate()
+	newBoulder.global_position = pos
+	newBoulder.setDirection(dir)
+	newBoulder.par = self
+	newBoulder.playerStats = stats
+	newBoulder.speed = spells.boulder_speed
+	get_tree().root.add_child(newBoulder)
 
 
 func killedEnemy(experience):

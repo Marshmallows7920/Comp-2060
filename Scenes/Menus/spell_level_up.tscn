@@ -1,14 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://c5vp7slcx2b4l"]
+[gd_scene load_steps=3 format=3 uid="uid://c5vp7slcx2b4l"]
 
+[ext_resource type="Script" path="res://Scripts/spell_level_up.gd" id="1_gl3mn"]
 [ext_resource type="PackedScene" uid="uid://chcpuuk2sg2d0" path="res://Scenes/Menus/spell_select_card.tscn" id="1_ipd2c"]
 
 [node name="SpellLevelUp" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_gl3mn")
+spell_select_card = "res://Scenes/Menus/spell_select_card.tscn"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -17,7 +21,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.498039)
+color = Color(0, 0, 0, 0.75)
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -40,7 +44,7 @@ size_flags_vertical = 6
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 64
 text = "Level Up!"
 horizontal_alignment = 1
 
@@ -50,7 +54,7 @@ size_flags_vertical = 6
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 32
 text = "Select Spell"
 horizontal_alignment = 1
 
