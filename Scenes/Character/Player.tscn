@@ -184,6 +184,6 @@ script = ExtResource("15_g2x1t")
 
 [node name="ApprenticeStaff" parent="WeaponHolder" instance=ExtResource("16_fk68p")]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="Hotbar" parent="CanvasLayer" instance=ExtResource("17_8rva6")]
+[node name="Hotbar" parent="HUD" instance=ExtResource("17_8rva6")]

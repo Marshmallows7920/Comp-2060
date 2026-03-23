@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5a1guvbqbirj"
-path="res://.godot/imported/Fireball_outline.png-8817616a77554709a259680831dc596d.ctex"
+uid="uid://24y2oaix1qos"
+path="res://.godot/imported/wizard.png-c22058006198ad889e3052f93f7fafdc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Fireball_outline.png"
-dest_files=["res://.godot/imported/Fireball_outline.png-8817616a77554709a259680831dc596d.ctex"]
+source_file="res://Sprites/Enemies/wizard.png"
+dest_files=["res://.godot/imported/wizard.png-c22058006198ad889e3052f93f7fafdc.ctex"]
 
 [params]
 
