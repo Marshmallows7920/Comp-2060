@@ -1,18 +1,18 @@
 [gd_scene load_steps=10 format=3 uid="uid://dtqjivm2acj5"]
 
 [ext_resource type="Script" path="res://Scripts/slime_attack_1.gd" id="1_ancbb"]
-[ext_resource type="Texture2D" uid="uid://bdjbm0gwfgj4k" path="res://Sprites/blue_slime.png" id="2_2tsvp"]
+[ext_resource type="Texture2D" uid="uid://bdjbm0gwfgj4k" path="res://Sprites/Enemies/blue_slime.png" id="2_bg31x"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2fibr"]
-atlas = ExtResource("2_2tsvp")
+atlas = ExtResource("2_bg31x")
 region = Rect2(64, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ycroc"]
-atlas = ExtResource("2_2tsvp")
+atlas = ExtResource("2_bg31x")
 region = Rect2(96, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s5n0h"]
-atlas = ExtResource("2_2tsvp")
+atlas = ExtResource("2_bg31x")
 region = Rect2(128, 64, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ielic"]

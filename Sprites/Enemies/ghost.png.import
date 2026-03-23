@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bdjbm0gwfgj4k"
-path="res://.godot/imported/blue_slime.png-c36b0ed69d1601d48dda344a7962a332.ctex"
+uid="uid://c2xi5gkpjm4j3"
+path="res://.godot/imported/ghost.png-d8ad19c439031ef7cd6c3c8771e380b9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/blue_slime.png"
-dest_files=["res://.godot/imported/blue_slime.png-c36b0ed69d1601d48dda344a7962a332.ctex"]
+source_file="res://Sprites/Enemies/ghost.png"
+dest_files=["res://.godot/imported/ghost.png-d8ad19c439031ef7cd6c3c8771e380b9.ctex"]
 
 [params]
 

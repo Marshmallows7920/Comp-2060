@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://24y2oaix1qos"
-path="res://.godot/imported/wizard.png-2cc411f70c56ff61b975b163e19e6fef.ctex"
+uid="uid://v21hked4wokx"
+path="res://.godot/imported/skeleton_swordman.png-0884100529502696c30ec79f7eb0e9b8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/wizard.png"
-dest_files=["res://.godot/imported/wizard.png-2cc411f70c56ff61b975b163e19e6fef.ctex"]
+source_file="res://Sprites/Enemies/skeleton_swordman.png"
+dest_files=["res://.godot/imported/skeleton_swordman.png-0884100529502696c30ec79f7eb0e9b8.ctex"]
 
 [params]
 

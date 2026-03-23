@@ -6,7 +6,7 @@ var attackPower
 var damageType
 
 func _ready():
-	print(get_parent())
+	#print(get_parent())
 	par = get_parent()
 	if par != null:
 		attackPower = par.attackPower
@@ -23,7 +23,7 @@ func _process(delta):
 
 
 func _on_animated_sprite_2d_animation_finished():
-	print("attack_1 anim done")
+	#print("attack_1 anim done")
 	queue_free()
 
 

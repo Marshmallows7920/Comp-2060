@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://v21hked4wokx"
-path="res://.godot/imported/skeleton_swordman.png-acaff35185fe53a3d942d3a1f1bf7c10.ctex"
+uid="uid://c5a1guvbqbirj"
+path="res://.godot/imported/Fireball_outline.png-5de1962fba5b4cc80f164186096a72af.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/skeleton_swordman.png"
-dest_files=["res://.godot/imported/skeleton_swordman.png-acaff35185fe53a3d942d3a1f1bf7c10.ctex"]
+source_file="res://Sprites/Spells/Fireball_outline.png"
+dest_files=["res://.godot/imported/Fireball_outline.png-5de1962fba5b4cc80f164186096a72af.ctex"]
 
 [params]
 

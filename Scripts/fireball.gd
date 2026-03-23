@@ -1,11 +1,14 @@
 extends Area2D
 
+var playerStats
+var par
+
 @export var SPEED = 200
 
 var direction:Vector2
 
 func _ready():
-	pass # Replace with function body.
+	pass
 
 
 func _physics_process(delta):
@@ -18,10 +21,15 @@ func setDirection(dir):
 	rotation = direction.angle()
 
 
+
 func _on_body_entered(body):
 	if body.is_in_group("TileMap"):
 		queue_free()
 		#print("hit wall")
+	elif body.is_in_group("Enemy"):
+		body.attacked(playerStats.atk_stat(), "fire", par)
+		print("Hit Enemy")
+		queue_free()
 
 
 func _on_area_exited(area):

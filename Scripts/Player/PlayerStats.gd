@@ -2,6 +2,9 @@ extends Node
 class_name PlayerStats
 
 @export var level: int = 1
+@export var experience: int = 0
+@export var experience_needed:int = 100
+@export var experience_step:int = 100
 
 @export var base_hp: int = 50
 @export var base_mana: int = 30
@@ -150,3 +153,19 @@ func take_damage(amount: int, attack_type: String = DamageCalculator.TYPE_MAGIC)
 
 func is_dead() -> bool:
 	return current_hp <= 0
+
+
+func exp_gained(amount:int):
+	experience += amount
+	while(check_level_up()):
+		#call stuff that happens on level up here
+		pass
+
+
+func check_level_up() -> bool:
+	var leveled_up = false
+	if experience >= experience_needed:
+		experience -= experience_needed
+		experience_needed += experience_step
+		leveled_up = true
+	return leveled_up

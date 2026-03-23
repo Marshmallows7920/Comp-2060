@@ -8,7 +8,7 @@ extends CharacterBody2D
 @onready var hp_bar: ProgressBar = $UIAnchor/HPBar
 @onready var mana_bar: ProgressBar = $UIAnchor/ManaBar
 
-@onready var hotbar = $CanvasLayer/Hotbar
+@onready var hotbar = $HUD/Hotbar
 
 var equipped_weapon: Weapon = null
 var facing_direction: Vector2 = Vector2.RIGHT
@@ -175,5 +175,10 @@ func spawnFireball(pos, dir):
 	var newFireball = load(fireball).instantiate()
 	newFireball.global_position = pos
 	newFireball.setDirection(dir)
+	newFireball.par = self
+	newFireball.playerStats = stats
 	get_tree().root.add_child(newFireball)
 
+
+func killedEnemy(experience):
+	stats.exp_gained(experience)
