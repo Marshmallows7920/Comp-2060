@@ -5,12 +5,16 @@ var par
 var speed
 var direction: Vector2
 
+@export_file("*.wav") var launch_sound:String
+@export_file("*.wav") var impact_sound:String
+
 @export var life_time: float = 1.0
 
 var hit_targets: Array = []
 
 
 func _ready():
+	play_launch_sound()
 	var timer = get_tree().create_timer(life_time)
 	timer.timeout.connect(queue_free)
 
@@ -26,8 +30,10 @@ func setDirection(dir):
 
 func _on_body_entered(body):
 	if body.is_in_group("TileMap"):
+		play_impact_sound()
 		queue_free()
 	elif body.is_in_group("Enemy"):
+		play_impact_sound()
 		if body in hit_targets:
 			return
 		
@@ -41,3 +47,11 @@ func _on_body_entered(body):
 func _on_area_exited(area):
 	if area.is_in_group("PlayArea"):
 		queue_free()
+
+func play_launch_sound():
+	$AudioStreamPlayer2D.stream = load(launch_sound)
+	$AudioStreamPlayer2D.play()
+
+func play_impact_sound():
+	$AudioStreamPlayer2D2.stream = load(impact_sound)
+	$AudioStreamPlayer2D2.play()

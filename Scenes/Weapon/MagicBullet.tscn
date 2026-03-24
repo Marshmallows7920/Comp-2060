@@ -9,6 +9,8 @@
 collision_layer = 2
 collision_mask = 6
 script = ExtResource("1_neh0k")
+launch_sound = "res://Audio/Arcane_AttackF1.wav"
+impact_sound = "res://Audio/Shine_Impact2.wav"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_mmhnf")
@@ -18,5 +20,9 @@ scale = Vector2(0.3, 0.3)
 texture = ExtResource("2_n6t03")
 region_enabled = true
 region_rect = Rect2(9.5, 1.5, 82, 80)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

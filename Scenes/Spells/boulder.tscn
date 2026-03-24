@@ -14,6 +14,8 @@ radius = 14.0
 collision_layer = 8
 collision_mask = 6
 script = ExtResource("1_cwbnq")
+launch_sound = "res://Audio/EM_EARTH_LAUNCH_01.wav"
+impact_sound = "res://Audio/EM_EARTH_IMPACT_01.wav"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_6psve")
@@ -22,6 +24,10 @@ texture = ExtResource("1_w4e8t")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource("CircleShape2D_ijrsd")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
