@@ -108,7 +108,6 @@ func attack() -> void:
 		
 		anim.play("Attack")
 
-		# flip sprite based on mouse
 		if mouse_dir.x != 0:
 			anim.flip_h = mouse_dir.x < 0
 
@@ -184,7 +183,10 @@ func die() -> void:
 	velocity = Vector2.ZERO
 	anim.play("Die")
 	await anim.animation_finished
-	anim.stop()
+	
+	var last_frame = anim.sprite_frames.get_frame_count("Die") - 1
+	anim.frame = last_frame
+	anim.pause()
 
 
 func killedEnemy(experience):
@@ -196,3 +198,11 @@ func level_up():
 	var spell_select_menu = load(spell_level_up_menu).instantiate()
 	spell_select_menu.spells = spells
 	hud.add_child(spell_select_menu)
+
+func _on_sprite_animation_finished() -> void:
+	if anim.animation == "Attack" and not is_dead:
+		if velocity != Vector2.ZERO:
+			anim.play("Walk")
+		else:
+			anim.stop()
+			anim.frame = 0

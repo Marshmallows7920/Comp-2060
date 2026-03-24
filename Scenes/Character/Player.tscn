@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://bt22htiyrymw7"]
+[gd_scene load_steps=40 format=3 uid="uid://bt22htiyrymw7"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_t6nyq"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStats.gd" id="2_c4w7p"]
@@ -14,7 +14,9 @@
 [ext_resource type="Texture2D" uid="uid://btr0mcqkuc6ab" path="res://Sprites/Player sprite/Walking/0_Dark_Oracle_Walking_000.png" id="11_u1l3c"]
 [ext_resource type="Texture2D" uid="uid://dqlhjwok8yot5" path="res://Sprites/Player sprite/Walking/0_Dark_Oracle_Walking_009.png" id="12_fslwu"]
 [ext_resource type="Texture2D" uid="uid://bwrra4mvn2y87" path="res://Sprites/Player sprite/Walking/0_Dark_Oracle_Walking_003.png" id="13_3uyx5"]
+[ext_resource type="Texture2D" uid="uid://dwsclcaetwpys" path="res://Sprites/Player sprite/Walking/0_Dark_Oracle_Walking_013.png" id="14_nc04r"]
 [ext_resource type="Script" path="res://Scripts/Item/Inventory.gd" id="15_g2x1t"]
+[ext_resource type="Texture2D" uid="uid://dy52cskv5m0pe" path="res://Sprites/Player sprite/Walking/0_Dark_Oracle_Walking_010.png" id="15_ldvpj"]
 [ext_resource type="PackedScene" uid="uid://bt1y6kfs1j0mc" path="res://Scenes/Weapon/ApprenticeStaff.tscn" id="16_fk68p"]
 [ext_resource type="Script" path="res://Scripts/Player/SpellStats.gd" id="16_vvgb8"]
 [ext_resource type="PackedScene" uid="uid://bsdn3mc8tt0ex" path="res://Scenes/Menus/hotbar.tscn" id="17_8rva6"]
@@ -77,6 +79,14 @@ region = Rect2(0, 0, 900, 900)
 atlas = ExtResource("13_3uyx5")
 region = Rect2(0, 0, 900, 900)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ruou"]
+atlas = ExtResource("14_nc04r")
+region = Rect2(0, 0, 900, 900)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_07nyl"]
+atlas = ExtResource("15_ldvpj")
+region = Rect2(0, 0, 900, 900)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_1oqfe"]
 animations = [{
 "frames": [{
@@ -131,6 +141,12 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_66c46")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ruou")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_07nyl")
 }],
 "loop": true,
 "name": &"Walk",
@@ -167,7 +183,8 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_hj7mx")
 position = Vector2(0, 5)
 scale = Vector2(0.2, 0.205556)
 sprite_frames = SubResource("SpriteFrames_1oqfe")
-animation = &"Attack"
+animation = &"Walk"
+frame_progress = 0.865998
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-5, 10)
@@ -202,3 +219,5 @@ num_slots = 3
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="Hotbar" parent="HUD" instance=ExtResource("17_8rva6")]
+
+[connection signal="animation_finished" from="Sprite" to="." method="_on_sprite_animation_finished"]
