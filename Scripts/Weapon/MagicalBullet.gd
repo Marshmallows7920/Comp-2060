@@ -23,6 +23,6 @@ func _on_body_entered(body: Node) -> void:
 		return
 
 	if body.has_method("take_damage"):
-		body.take_damage(damage, attack_type)
+		body.take_damage(damage, attack_type, shooter)
 
 	queue_free()

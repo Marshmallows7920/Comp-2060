@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bk3n20yu1stoi" path="res://Sprites/Spells/Icicle_outline.png" id="1_34doj"]
 [ext_resource type="Shader" uid="uid://c671eodr50kjb" path="res://Shaders/icicle.tres" id="1_v36b2"]
-[ext_resource type="Script" path="res://Scripts/icicle.gd" id="1_w20u6"]
+[ext_resource type="Script" path="res://Scripts/Spell/icicle.gd" id="1_w20u6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sdswy"]
 shader = ExtResource("1_v36b2")

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://023ghlt7apwu"]
 
 [ext_resource type="Shader" uid="uid://bgtv0e7a0r2y4" path="res://Shaders/boulder.tres" id="1_68m1x"]
-[ext_resource type="Script" path="res://Scripts/boulder.gd" id="1_cwbnq"]
+[ext_resource type="Script" path="res://Scripts/Spell/boulder.gd" id="1_cwbnq"]
 [ext_resource type="Texture2D" uid="uid://dr7a361k6eiyb" path="res://Sprites/Spells/Boulder_outline.png" id="1_w4e8t"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6psve"]

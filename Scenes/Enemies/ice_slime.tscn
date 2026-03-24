@@ -1,6 +1,6 @@
 [gd_scene load_steps=25 format=3 uid="uid://pjrq1rdub88u"]
 
-[ext_resource type="Script" path="res://Scripts/slime.gd" id="1_ueojc"]
+[ext_resource type="Script" path="res://Scripts/Enemy/slime.gd" id="1_ueojc"]
 [ext_resource type="PackedScene" uid="uid://dtqjivm2acj5" path="res://Scenes/Enemies/slime_attack_1.tscn" id="2_q6k0q"]
 [ext_resource type="Shader" path="res://Shaders/damage_flash.gdshader" id="3_45e17"]
 [ext_resource type="Texture2D" uid="uid://bdjbm0gwfgj4k" path="res://Sprites/Enemies/blue_slime.png" id="3_ob4pj"]
@@ -143,7 +143,7 @@ radius = 64.0
 
 [node name="IceSlime" type="CharacterBody2D" groups=["Enemy"]]
 collision_layer = 2
-collision_mask = 14
+collision_mask = 15
 motion_mode = 1
 wall_min_slide_angle = 0.0872665
 script = ExtResource("1_ueojc")

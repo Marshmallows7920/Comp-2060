@@ -22,13 +22,13 @@ var is_dead: bool = false
 
 func _ready() -> void:
 	hotbar.spells = spells
-	spells.num_slots = clampi(spells.num_slots, 0, spells.MAX_SLOTS-1)
+	spells.num_slots = clampi(spells.num_slots, 0, spells.MAX_SLOTS - 1)
 	spells.slots = []
 	spells.cooldowns = []
 	for i in range(0, spells.MAX_SLOTS):
 		spells.slots.append("")
 		spells.cooldowns.append(0.0)
-	spells.selected = clampi(spells.selected, 0, spells.num_slots-1)
+	spells.selected = clampi(spells.selected, 0, spells.num_slots - 1)
 	level_up()
 	hotbar.update(spells.num_slots, spells.slots, spells.selected, spells.cooldowns)
 	
@@ -39,31 +39,29 @@ func _ready() -> void:
 	update_ui()
 
 
-
 func _process(delta):
-	for i in range(0,spells.num_slots):
-		if Input.is_action_just_pressed("Slot"+str(i+1)):
+	for i in range(0, spells.num_slots):
+		if Input.is_action_just_pressed("Slot" + str(i + 1)):
 			if spells.num_slots >= i:
-				spells.selected = i-1
+				spells.selected = i
+	
 	if Input.is_action_just_pressed("NextSlot"):
-		spells.selected = wrapi(spells.selected+1, 0, spells.num_slots)
+		spells.selected = wrapi(spells.selected + 1, 0, spells.num_slots)
 	elif Input.is_action_just_pressed("PrevSlot"):
-		spells.selected = wrapi(spells.selected-1, 0, spells.num_slots)
+		spells.selected = wrapi(spells.selected - 1, 0, spells.num_slots)
 	
 	for i in range(0, spells.cooldowns.size()):
 		spells.cooldowns[i] = spells.cooldowns[i] - delta
-		#print("CD: " + str(spells.cooldowns[i]))
 	
 	hotbar.update(spells.num_slots, spells.slots, spells.selected, spells.cooldowns)
 	
-	if Input.is_action_just_pressed("Attack"):
-			cast_spell()
-			
+	if Input.is_action_just_pressed("CastSpell"):
+		SpellCaster.cast_spell(self, spells, stats)
+	
 	if Input.is_action_just_pressed("Escape"):
-			get_tree().paused = true
-			var settings = load(settingsMenu).instantiate()
-			hud.add_child(settings)
-
+		get_tree().paused = true
+		var settings = load(settingsMenu).instantiate()
+		hud.add_child(settings)
 
 
 func _physics_process(delta: float) -> void:
@@ -105,8 +103,14 @@ func movement() -> void:
 
 func attack() -> void:
 	if Input.is_action_just_pressed("Attack") and equipped_weapon != null:
-		equipped_weapon.attack(facing_direction, stats.atk_stat(), stats.damage_type)
+		var mouse_dir = (get_global_mouse_position() - global_position).normalized()
+		equipped_weapon.attack(mouse_dir, stats.atk_stat(), stats.damage_type)
+		
 		anim.play("Attack")
+
+		# flip sprite based on mouse
+		if mouse_dir.x != 0:
+			anim.flip_h = mouse_dir.x < 0
 
 
 func item_input() -> void:
@@ -183,60 +187,9 @@ func die() -> void:
 	anim.stop()
 
 
-func cast_spell():
-	match spells.slots[spells.selected]:
-		"fireball":
-			if spells.cooldowns[spells.selected] <= 0.0 and stats.current_mana >= spells.fireball_mana_cost:
-				var dir = (get_global_mouse_position() - position).normalized()
-				spawn_fireball(position, dir)
-				spells.cooldowns[spells.selected] = spells.fireball_cooldown
-				stats.current_mana -= spells.fireball_mana_cost
-		"icicle":
-			if spells.cooldowns[spells.selected] <= 0.0 and stats.current_mana >= spells.icicle_mana_cost:
-				var dir = (get_global_mouse_position() - position).normalized()
-				spawn_icicle(position, dir)
-				spells.cooldowns[spells.selected] = spells.icicle_cooldown
-				stats.current_mana -= spells.icicle_mana_cost
-		"boulder":
-			if spells.cooldowns[spells.selected] <= 0.0 and stats.current_mana >= spells.boulder_mana_cost:
-				var dir = (get_global_mouse_position() - position).normalized()
-				spawn_boulder(position, dir)
-				spells.cooldowns[spells.selected] = spells.boulder_cooldown
-				stats.current_mana -= spells.boulder_mana_cost
-
-
-func spawn_fireball(pos, dir):
-	var newFireball = load(spells.fireball).instantiate()
-	newFireball.global_position = pos
-	newFireball.setDirection(dir)
-	newFireball.par = self
-	newFireball.playerStats = stats
-	newFireball.speed = spells.fireball_speed
-	get_tree().root.add_child(newFireball)
-
-
-func spawn_icicle(pos, dir):
-	var newIcicle = load(spells.icicle).instantiate()
-	newIcicle.global_position = pos
-	newIcicle.setDirection(dir)
-	newIcicle.par = self
-	newIcicle.playerStats = stats
-	newIcicle.speed = spells.icicle_speed
-	get_tree().root.add_child(newIcicle)
-
-
-func spawn_boulder(pos, dir):
-	var newBoulder = load(spells.boulder).instantiate()
-	newBoulder.global_position = pos
-	newBoulder.setDirection(dir)
-	newBoulder.par = self
-	newBoulder.playerStats = stats
-	newBoulder.speed = spells.boulder_speed
-	get_tree().root.add_child(newBoulder)
-
-
 func killedEnemy(experience):
 	stats.exp_gained(experience)
+
 
 func level_up():
 	get_tree().paused = true

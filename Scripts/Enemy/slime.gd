@@ -1,5 +1,4 @@
-extends CharacterBody2D
-
+extends Enemy
 
 @export var attack_1:PackedScene
 
@@ -28,10 +27,8 @@ var tileMaps
 var tileMap
 
 @export var attackPower:float = 5.0
-@export var damageType:String = "ice"
+@export var damageType:String = DamageCalculator.TYPE_PHYSIC
 
-@export var hp:int = 50
-@export var experience:int = 100
 
 func _ready():
 	closestTileMap()
@@ -41,35 +38,30 @@ func _ready():
 
 func _process(delta):
 	var custom_time = sprite.material.get_shader_parameter("custom_time")
-	if custom_time+delta >= 1.0:
+	if custom_time + delta >= 1.0:
 		sprite.material.set_shader_parameter("custom_time", 1.0)
 	else:
-		sprite.material.set_shader_parameter("custom_time", custom_time+delta)
+		sprite.material.set_shader_parameter("custom_time", custom_time + delta)
 
 
 func _physics_process(delta):
 	match state:
-		#UNAWARE IDLE STATE
 		"unaware_idle":
 			if prevState != state:
-				#print("unaware_idle")
 				actionTimer = randf_range(actionMinTime, actionMaxTime)
 				$AnimatedSprite2D.play("idle")
 			else:
 				actionTimer -= delta
 				if actionTimer <= 0:
 					nextState = "unaware_wander"
-		
-		#UNAWARE WANDER STATE
+
 		"unaware_wander":
-			#update for better wander navigation
 			if prevState != state:
-				#print("unaware_wander")
 				if tileMap == null:
 					closestTileMap()
-				
+
 				if tileMap != null:
-					var navCells = tileMap.get_used_cells(0) #id 0 = navigation layer
+					var navCells = tileMap.get_used_cells(0)
 					if navCells != null:
 						target = null
 						wanderTarget = navCells.pick_random()
@@ -81,10 +73,10 @@ func _physics_process(delta):
 				else:
 					wanderTarget = null
 					direction = Vector2.RIGHT.rotated(randf_range(0.0, TAU))
-				
+
 				$AnimatedSprite2D.play("walk_right")
 				actionTimer = randf_range(actionMinTime, actionMaxTime) + 5.0
-			
+
 			else:
 				if wanderTarget != null:
 					if !navAgent.is_navigation_finished() and !navAgent.is_target_reached():
@@ -95,40 +87,38 @@ func _physics_process(delta):
 						nextState = "unaware_idle"
 						navAgent.target_position = global_position
 						navAgent.get_next_path_position()
-				
+
 				else:
 					velocity = direction * speed * 0.25
 					move_and_slide()
-				
+
 				if direction.x > 0:
 					$AnimatedSprite2D.flip_h = false
 				else:
 					$AnimatedSprite2D.flip_h = true
-				
+
 				actionTimer -= delta
 				if actionTimer <= 0:
 					nextState = "unaware_idle"
 					if wanderTarget != null:
 						navAgent.target_position = global_position
 						navAgent.get_next_path_position()
-		
-		#CHASE STATE
+
 		"chase":
 			if prevState != state:
 				nextState = "chase"
-				#print("chase")
 				$AnimatedSprite2D.play("walk_right")
 				if target != null:
 					navAgent.target_position = target.global_position
 				navUpdateTimer.start()
-			
+
 			if !navAgent.is_navigation_finished() and !navAgent.is_target_reached():
 				direction = to_local(navAgent.get_next_path_position()).normalized()
 				velocity = direction * speed
 				move_and_slide()
 			else:
 				nextState = "attack_1"
-			
+
 			if !navAgent.is_target_reachable():
 				if reachableLast == true:
 					interestTimer = loseInterestTime
@@ -136,34 +126,30 @@ func _physics_process(delta):
 			else:
 				reachableLast = true
 				interestTimer = null
-			
+
 			if direction.x > 0:
 				$AnimatedSprite2D.flip_h = false
 			else:
 				$AnimatedSprite2D.flip_h = true
-		
-		#ATTACK_1 STATE
+
 		"attack_1":
 			if prevState != state:
 				$AttackArea/CollisionShape2D.disabled = true
 				nextState = "attack_1"
-				#print("attack_1")
 				$AnimatedSprite2D.play("attack_1")
 				actionTimer = 0.4
 			elif actionTimer != null:
-					actionTimer -= delta
-					if actionTimer <= 0:
-						var attack = attack_1.instantiate()
-						if $AnimatedSprite2D.flip_h == true:
-							attack.scale.x = -1
-						add_child(attack)
-						actionTimer = null
-		
-		#COOLDOWN STATE
+				actionTimer -= delta
+				if actionTimer <= 0:
+					var attack = attack_1.instantiate()
+					if $AnimatedSprite2D.flip_h == true:
+						attack.scale.x = -1
+					add_child(attack)
+					actionTimer = null
+
 		"cooldown":
 			if prevState != state:
 				nextState = "cooldown"
-				#print("cooldown")
 				$AnimatedSprite2D.play("idle")
 				actionTimer = attackCooldown
 			else:
@@ -171,16 +157,15 @@ func _physics_process(delta):
 				if actionTimer <= 0:
 					nextState = "chase"
 					$AttackArea/CollisionShape2D.disabled = false
-	
+
 	if interestTimer != null:
 		interestTimer -= delta
 		if interestTimer <= 0:
 			nextState = "unaware_wander"
 			interestTimer = null
-	
+
 	prevState = state
 	state = nextState
-
 
 
 func closestTileMap():
@@ -195,7 +180,6 @@ func closestTileMap():
 		print(tileMap.name)
 
 
-
 func _on_animated_sprite_2d_animation_finished():
 	if state == "attack_1":
 		state = "cooldown"
@@ -204,7 +188,6 @@ func _on_animated_sprite_2d_animation_finished():
 func _on_sight_area_body_entered(body):
 	if body.is_in_group("Player"):
 		target = body
-		#print("Sight %s" % body)
 		if state == "unaware_idle" or state == "unaware_wander":
 			state = "chase"
 
@@ -212,7 +195,6 @@ func _on_sight_area_body_entered(body):
 func _on_attack_area_body_entered(body):
 	if body.is_in_group("Player"):
 		target = body
-		#print("Attack %s" % body)
 		state = "attack_1"
 
 
@@ -226,17 +208,9 @@ func _on_update_path_timer_timeout():
 			navAgent.target_position = tileMap.to_global(tileMap.map_to_local(wanderTarget))
 		navUpdateTimer.start()
 
-func attacked(amount:int, type:String, attacker:Node):
-	var multiplier = 1.0
-	if type == "Fire":
-		multiplier = 1.5
-	if amount * multiplier > 0:
-		hp -= amount * multiplier
-		sprite.material.set_shader_parameter("custom_time", 0)
-		if attacker.is_in_group("Player"):
-			target = attacker
-			#print("Attack %s" % body)
-			state = "chase"
-	if hp <=0:
-		attacker.killedEnemy(experience)
-		queue_free()
+
+func on_hit(attacker: Node = null) -> void:
+	sprite.material.set_shader_parameter("custom_time", 0)
+	if attacker != null and attacker.is_in_group("Player"):
+		target = attacker
+		state = "chase"
