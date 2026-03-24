@@ -16,7 +16,7 @@ func _process(delta):
 	update_cooldown_shaders()
 
 
-func update(num_slots, slots, selected, cooldowns):
+func update(num_slots, slots, selected):
 	clear_default()
 	var index = slotContainer.get_child_count()
 	for i in range(0, index):
@@ -65,4 +65,16 @@ func clear_default():
 		cleared = true
 
 func update_cooldown_shaders():
-	pass
+	var index = 0
+	for slot in slotContainer.get_children():
+		var spell = spells.slots[index]
+		var max
+		match spell:
+			"fireball":
+				max = spells.fireball_cooldown
+			"icicle":
+				max = spells.icicle_cooldown
+			"boulder":
+				max = spells.boulder_cooldown
+		slot.update_cooldown(spells.cooldowns[index], max)
+		index += 1

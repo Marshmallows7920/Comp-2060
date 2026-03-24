@@ -4,9 +4,12 @@
 [ext_resource type="StyleBox" uid="uid://cn428uk6xlisg" path="res://Styles/hotbar_slot_panel_selected.stylebox" id="2_j1wd2"]
 [ext_resource type="Shader" path="res://Shaders/hotbar_slot_cooldown.gdshader" id="2_tc0l6"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jlpn0"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ystuh"]
 shader = ExtResource("2_tc0l6")
-shader_parameter/cooldown = null
+shader_parameter/cooldown = 0.5
+shader_parameter/max_cooldown = 1.0
+shader_parameter/cooldown_overlay = Vector4(0, 0, 0, 0.5)
+shader_parameter/clear = Vector4(0, 0, 0, 0)
 
 [node name="HotbarSlot" type="AspectRatioContainer"]
 custom_minimum_size = Vector2(128, 128)
@@ -19,12 +22,16 @@ selected_style = "res://Styles/hotbar_slot_panel_selected.stylebox"
 not_selected_style = "res://Styles/hotbar_slot_panel_not_selected.stylebox"
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
-material = SubResource("ShaderMaterial_jlpn0")
 layout_mode = 2
 theme_override_styles/panel = ExtResource("2_j1wd2")
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer"]
 layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="PanelContainer"]
+material = SubResource("ShaderMaterial_ystuh")
+layout_mode = 2
+color = Color(1, 0, 0, 1)
 
 [node name="SlotNumber" type="Label" parent="PanelContainer"]
 layout_mode = 2

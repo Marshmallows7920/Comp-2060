@@ -30,7 +30,7 @@ func _ready() -> void:
 		spells.cooldowns.append(0.0)
 	spells.selected = clampi(spells.selected, 0, spells.num_slots - 1)
 	level_up()
-	hotbar.update(spells.num_slots, spells.slots, spells.selected, spells.cooldowns)
+	hotbar.update(spells.num_slots, spells.slots, spells.selected)
 	
 	if weapon_holder.get_child_count() > 0:
 		var first_child: Node = weapon_holder.get_child(0)
@@ -51,9 +51,9 @@ func _process(delta):
 		spells.selected = wrapi(spells.selected - 1, 0, spells.num_slots)
 	
 	for i in range(0, spells.cooldowns.size()):
-		spells.cooldowns[i] = spells.cooldowns[i] - delta
+		spells.cooldowns[i] = max(spells.cooldowns[i] - delta, 0.0)
 	
-	hotbar.update(spells.num_slots, spells.slots, spells.selected, spells.cooldowns)
+	hotbar.update(spells.num_slots, spells.slots, spells.selected)
 	
 	if Input.is_action_just_pressed("CastSpell"):
 		SpellCaster.cast_spell(self, spells, stats)

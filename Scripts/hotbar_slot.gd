@@ -1,6 +1,6 @@
 extends AspectRatioContainer
 
-@onready var panel = $PanelContainer
+@onready var overlay = $PanelContainer/ColorRect
 
 @export_file("*.stylebox") var selected_style:String
 @export_file("*.stylebox") var not_selected_style:String
@@ -37,5 +37,7 @@ func outline(is_selected):
 		custom_minimum_size = default_size
 
 
-func update_cooldown():
-	panel.material = ShaderMaterial.new()
+func update_cooldown(cd, max):
+	overlay.material = overlay.material.duplicate()
+	overlay.material.set_shader_parameter("cooldown", cd)
+	overlay.material.set_shader_parameter("max_cooldown", max)
