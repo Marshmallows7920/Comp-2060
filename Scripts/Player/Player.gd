@@ -204,5 +204,8 @@ func _on_sprite_animation_finished() -> void:
 		if velocity != Vector2.ZERO:
 			anim.play("Walk")
 		else:
-			anim.stop()
-			anim.frame = 0
+			anim.play("idle")
+
+
+func _on_sprite_animation_changed():
+	pass # Replace with function body.
