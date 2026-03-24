@@ -16,7 +16,6 @@ var reachableLast = true
 @export var loseInterestTime:float = 15.0
 var interestTimer
 
-@export var speed:float = 50.0
 @export var attackCooldown:float = 1.0
 
 @onready var navAgent = $Navigation/NavigationAgent2D
@@ -31,6 +30,7 @@ var tileMap
 
 
 func _ready():
+	super._ready()
 	closestTileMap()
 	sprite.material = sprite.material.duplicate()
 	sprite.material.set_shader_parameter("custom_time", 1.0)
@@ -45,6 +45,8 @@ func _process(delta):
 
 
 func _physics_process(delta):
+	update_stun(delta)
+
 	match state:
 		"unaware_idle":
 			if prevState != state:
@@ -78,10 +80,13 @@ func _physics_process(delta):
 				actionTimer = randf_range(actionMinTime, actionMaxTime) + 5.0
 
 			else:
-				if wanderTarget != null:
+				if is_stunned():
+					velocity = Vector2.ZERO
+					move_and_slide()
+				elif wanderTarget != null:
 					if !navAgent.is_navigation_finished() and !navAgent.is_target_reached():
 						direction = to_local(navAgent.get_next_path_position()).normalized()
-						velocity = direction * speed * 0.25
+						velocity = direction * current_speed * 0.25
 						move_and_slide()
 					else:
 						nextState = "unaware_idle"
@@ -89,7 +94,7 @@ func _physics_process(delta):
 						navAgent.get_next_path_position()
 
 				else:
-					velocity = direction * speed * 0.25
+					velocity = direction * current_speed * 0.25
 					move_and_slide()
 
 				if direction.x > 0:
@@ -112,9 +117,12 @@ func _physics_process(delta):
 					navAgent.target_position = target.global_position
 				navUpdateTimer.start()
 
-			if !navAgent.is_navigation_finished() and !navAgent.is_target_reached():
+			if is_stunned():
+				velocity = Vector2.ZERO
+				move_and_slide()
+			elif !navAgent.is_navigation_finished() and !navAgent.is_target_reached():
 				direction = to_local(navAgent.get_next_path_position()).normalized()
-				velocity = direction * speed
+				velocity = direction * current_speed
 				move_and_slide()
 			else:
 				nextState = "attack_1"
@@ -139,13 +147,17 @@ func _physics_process(delta):
 				$AnimatedSprite2D.play("attack_1")
 				actionTimer = 0.4
 			elif actionTimer != null:
-				actionTimer -= delta
-				if actionTimer <= 0:
-					var attack = attack_1.instantiate()
-					if $AnimatedSprite2D.flip_h == true:
-						attack.scale.x = -1
-					add_child(attack)
-					actionTimer = null
+				if is_stunned():
+					velocity = Vector2.ZERO
+					move_and_slide()
+				else:
+					actionTimer -= delta
+					if actionTimer <= 0:
+						var attack = attack_1.instantiate()
+						if $AnimatedSprite2D.flip_h == true:
+							attack.scale.x = -1
+						add_child(attack)
+						actionTimer = null
 
 		"cooldown":
 			if prevState != state:

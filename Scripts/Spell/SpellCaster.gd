@@ -4,10 +4,16 @@ class_name SpellCaster
 
 static func cast_spell(player, spells, stats):
 	match spells.slots[spells.selected]:
+
 		"fireball":
 			if spells.cooldowns[spells.selected] <= 0.0 and stats.current_mana >= spells.fireball_mana_cost:
-				var dir = (player.get_global_mouse_position() - player.position).normalized()
-				spawn_fireball(player, spells, stats, player.position, dir)
+				
+				var count = 16
+				for i in range(count):
+					var angle = i * (TAU / count)
+					var dir = Vector2.RIGHT.rotated(angle)
+					spawn_fireball(player, spells, stats, player.position, dir)
+				
 				spells.cooldowns[spells.selected] = spells.fireball_cooldown
 				stats.current_mana -= spells.fireball_mana_cost
 
@@ -27,7 +33,12 @@ static func cast_spell(player, spells, stats):
 
 
 static func spawn_fireball(player, spells, stats, pos, dir):
-	var newFireball = load(spells.fireball).instantiate()
+	var scene = load(spells.fireball)
+	if scene == null:
+		print("Fireball scene failed to load:", spells.fireball)
+		return
+
+	var newFireball = scene.instantiate()
 	newFireball.global_position = pos
 	newFireball.setDirection(dir)
 	newFireball.par = player
@@ -37,7 +48,12 @@ static func spawn_fireball(player, spells, stats, pos, dir):
 
 
 static func spawn_icicle(player, spells, stats, pos, dir):
-	var newIcicle = load(spells.icicle).instantiate()
+	var scene = load(spells.icicle)
+	if scene == null:
+		print("Icicle scene failed to load:", spells.icicle)
+		return
+
+	var newIcicle = scene.instantiate()
 	newIcicle.global_position = pos
 	newIcicle.setDirection(dir)
 	newIcicle.par = player
@@ -47,7 +63,12 @@ static func spawn_icicle(player, spells, stats, pos, dir):
 
 
 static func spawn_boulder(player, spells, stats, pos, dir):
-	var newBoulder = load(spells.boulder).instantiate()
+	var scene = load(spells.boulder)
+	if scene == null:
+		print("Boulder scene failed to load:", spells.boulder)
+		return
+
+	var newBoulder = scene.instantiate()
 	newBoulder.global_position = pos
 	newBoulder.setDirection(dir)
 	newBoulder.par = player

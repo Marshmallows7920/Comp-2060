@@ -5,9 +5,12 @@ var par
 var speed
 var direction: Vector2
 
+@export var life_time: float = 0.6
+
 
 func _ready():
-	pass
+	var timer = get_tree().create_timer(life_time)
+	timer.timeout.connect(queue_free)
 
 
 func _physics_process(delta):
