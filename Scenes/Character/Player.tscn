@@ -132,7 +132,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_66c46")
 }],
-"loop": true,
+"loop": false,
 "name": &"Walk",
 "speed": 5.0
 }]
@@ -167,7 +167,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_hj7mx")
 position = Vector2(0, 5)
 scale = Vector2(0.2, 0.205556)
 sprite_frames = SubResource("SpriteFrames_1oqfe")
-animation = &"Attack"
+animation = &"Walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-5, 10)
