@@ -1,7 +1,5 @@
 extends Area2D
 
-@export_file("*.tres") var noise_texture:String
-@onready var sprite = $Sprite2D
 var playerStats
 var par
 var speed
@@ -9,20 +7,17 @@ var speed
 var direction:Vector2
 
 func _ready():
-	sprite.material = sprite.material.duplicate()
-	sprite.material.set_shader_parameter("position", global_position)
-	sprite.material.set_shader_parameter("noise_texture", load(noise_texture))
+	pass
 
 
 func _physics_process(delta):
 	position = position + direction*speed*delta
-	sprite.material.set_shader_parameter("position", global_position)
 
 
 
 func setDirection(dir):
 	direction = dir
-	#rotation = direction.angle()
+	rotation = direction.angle()
 
 
 

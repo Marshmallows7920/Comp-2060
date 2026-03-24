@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://cnwetebocm7n5"]
 
 [ext_resource type="StyleBox" uid="uid://khekkpdchbg3" path="res://Styles/settings_menu_panel.stylebox" id="1_73q6a"]
-[ext_resource type="Script" path="res://Scripts/Menus/settings_menu.gd" id="1_ict5l"]
+[ext_resource type="Script" path="res://Scripts/settings_menu.gd" id="1_ict5l"]
 [ext_resource type="StyleBox" uid="uid://fk51pi3fewqb" path="res://Styles/settings_menu_tab_selected.stylebox" id="2_bs2ry"]
 [ext_resource type="StyleBox" uid="uid://b0i07hx6tk81f" path="res://Styles/settings_menu_tabbar_background.stylebox" id="2_xfv2h"]
 [ext_resource type="StyleBox" uid="uid://drbthc70yiag8" path="res://Styles/main_menu_button_normal.stylebox" id="3_1dguu"]

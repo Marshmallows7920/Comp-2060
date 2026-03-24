@@ -30,7 +30,7 @@ func _ready() -> void:
 		spells.cooldowns.append(0.0)
 	spells.selected = clampi(spells.selected, 0, spells.num_slots-1)
 	level_up()
-	hotbar.update(spells.num_slots, spells.slots, spells.selected)
+	hotbar.update(spells.num_slots, spells.slots, spells.selected, spells.cooldowns)
 	
 	if weapon_holder.get_child_count() > 0:
 		var first_child: Node = weapon_holder.get_child(0)
@@ -54,7 +54,7 @@ func _process(delta):
 		spells.cooldowns[i] = spells.cooldowns[i] - delta
 		#print("CD: " + str(spells.cooldowns[i]))
 	
-	hotbar.update(spells.num_slots, spells.slots, spells.selected)
+	hotbar.update(spells.num_slots, spells.slots, spells.selected, spells.cooldowns)
 	
 	if Input.is_action_just_pressed("Attack"):
 			cast_spell()

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cnxcnhn1e7d5l"]
 
 [ext_resource type="Shader" uid="uid://c3agafqnsyd7k" path="res://Shaders/fireball.tres" id="1_4m45x"]
-[ext_resource type="Script" path="res://Scripts/Spells/fireball.gd" id="1_kihqd"]
+[ext_resource type="Script" path="res://Scripts/fireball.gd" id="1_kihqd"]
 [ext_resource type="Texture2D" uid="uid://c5a1guvbqbirj" path="res://Sprites/Spells/Fireball_outline.png" id="1_t7bsi"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bc36e"]
