@@ -193,6 +193,7 @@ icicle_shader = "res://Shaders/icicle.tres"
 boulder = "res://Scenes/Spells/boulder.tscn"
 boulder_sprite = "res://Sprites/Spells/Boulder_outline.png"
 boulder_shader = "res://Shaders/boulder.tres"
+num_slots = 3
 
 [node name="WeaponHolder" type="Node2D" parent="."]
 

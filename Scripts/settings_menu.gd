@@ -47,8 +47,8 @@ func _on_quit_pressed():
 
 
 func _on_main_menu_pressed():
-	get_tree().change_scene_to_file(mainMenu)
 	get_tree().paused = false
+	get_tree().change_scene_to_file(mainMenu)
 
 
 func _on_window_mode_option_item_selected(index):
