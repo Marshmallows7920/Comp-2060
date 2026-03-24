@@ -18,7 +18,7 @@ func _ready():
 		queue_free()
 
 
-func _process(delta):
+func _process(_delta):
 	pass
 
 

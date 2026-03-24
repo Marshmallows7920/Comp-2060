@@ -2,7 +2,6 @@ extends Control
 
 @onready var slotContainer = $MarginContainer/SlotContainer
 @export_file("*.tscn") var hotbarSlotScene:String
-var slots
 var spells
 var cleared = false
 
@@ -12,11 +11,11 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	update_cooldown_shaders()
 
 
-func update(num_slots, slots, selected, cooldowns):
+func update(num_slots, slots, selected):
 	clear_default()
 	var index = slotContainer.get_child_count()
 	for i in range(0, index):

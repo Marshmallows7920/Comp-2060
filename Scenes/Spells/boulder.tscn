@@ -1,21 +1,29 @@
-[gd_scene load_steps=6 format=3 uid="uid://023ghlt7apwu"]
+[gd_scene load_steps=7 format=3 uid="uid://023ghlt7apwu"]
 
-[ext_resource type="Shader" uid="uid://bgtv0e7a0r2y4" path="res://Shaders/boulder.tres" id="1_68m1x"]
-[ext_resource type="Script" path="res://Scripts/boulder.gd" id="1_cwbnq"]
+[ext_resource type="Script" path="res://Scripts/Spells/boulder.gd" id="1_cwbnq"]
 [ext_resource type="Texture2D" uid="uid://dr7a361k6eiyb" path="res://Sprites/Spells/Boulder_outline.png" id="1_w4e8t"]
+[ext_resource type="Shader" path="res://Shaders/boulder.gdshader" id="2_ra0e7"]
+[ext_resource type="Texture2D" uid="uid://bbxt3kl3dvcy0" path="res://Sprites/Textures/boulder_noise_texture_2d.tres" id="3_3b52p"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6psve"]
-shader = ExtResource("1_68m1x")
+shader = ExtResource("2_ra0e7")
+shader_parameter/pos = Vector2(0, 0)
+shader_parameter/light_brown = Vector4(0.259, 0.2, 0.133, 1)
+shader_parameter/dark_brown = Vector4(0.11, 0.078, 0.043, 1)
+shader_parameter/noise_texture = ExtResource("3_3b52p")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ijrsd"]
 radius = 14.0
 
 [node name="Boulder" type="Area2D"]
+scale = Vector2(0.5, 0.5)
 collision_layer = 8
 collision_mask = 6
 script = ExtResource("1_cwbnq")
+noise_texture = "res://Sprites/Textures/boulder_noise_texture_2d.tres"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture_repeat = 2
 material = SubResource("ShaderMaterial_6psve")
 texture = ExtResource("1_w4e8t")
 
