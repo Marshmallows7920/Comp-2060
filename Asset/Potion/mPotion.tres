@@ -1,9 +1,15 @@
-[gd_resource type="Resource" script_class="HealItem" load_steps=2 format=3 uid="uid://ggaqjvpx5b30"]
+[gd_resource type="Resource" script_class="HealItem" load_steps=4 format=3 uid="uid://ggaqjvpx5b30"]
 
 [ext_resource type="Script" path="res://Scripts/Item/HealItem.gd" id="1_j0gxu"]
+[ext_resource type="Texture2D" uid="uid://ddeb1xcir1m8f" path="res://Sprites/Item/Potions/lifepotion.png" id="2_xsq0s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4t5ip"]
+atlas = ExtResource("2_xsq0s")
+region = Rect2(17, 0, 16, 16)
 
 [resource]
 script = ExtResource("1_j0gxu")
 heal_amount = 50
 item_name = "Medium Potion"
 description = ""
+sprite = SubResource("AtlasTexture_4t5ip")

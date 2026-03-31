@@ -5,8 +5,9 @@ class_name Enemy
 @export var defense: int = 0
 @export var enemy_type: String = DamageCalculator.TYPE_PHYSIC
 @export var experience: int = 100
-
 @export var speed: float = 50.0
+@export var drops: Array[Item] = []                          
+@export_file("*.tscn") var world_item_scene: String = ""    
 
 var stun_timer: float = 0.0
 var current_speed: float = 0.0
@@ -58,4 +59,16 @@ func on_hit(attacker: Node = null) -> void:
 func die(attacker: Node = null) -> void:
 	if attacker != null and attacker.has_method("killedEnemy"):
 		attacker.killedEnemy(experience)
+	drop_item()    
 	queue_free()
+
+func drop_item() -> void:
+	if drops.is_empty() or world_item_scene == "":
+		return
+	var item = drops.pick_random()
+	if item == null:
+		return
+	var world_item = load(world_item_scene).instantiate()
+	world_item.global_position = global_position
+	get_tree().current_scene.add_child(world_item)
+	world_item.setup(item)
