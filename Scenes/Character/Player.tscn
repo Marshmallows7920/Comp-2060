@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://bt22htiyrymw7"]
+[gd_scene load_steps=37 format=3 uid="uid://bt22htiyrymw7"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_t6nyq"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStats.gd" id="2_c4w7p"]
@@ -138,9 +138,13 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e03rg"]
-size = Vector2(90, 115)
+size = Vector2(40, 35.0002)
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_s2h3k"]
+radius = 48.0
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+y_sort_enabled = true
 scale = Vector2(0.2, 0.2)
 collision_mask = 6
 script = ExtResource("1_t6nyq")
@@ -148,32 +152,48 @@ settingsMenu = "res://Scenes/Menus/settings_menu.tscn"
 spell_level_up_menu = "res://Scenes/Menus/spell_level_up.tscn"
 
 [node name="UIAnchor" type="Node2D" parent="."]
+z_index = 100
+y_sort_enabled = true
+position = Vector2(9.53674e-06, -67.4998)
 
 [node name="HPBar" type="ProgressBar" parent="UIAnchor"]
+y_sort_enabled = true
 offset_left = -55.0
 offset_top = -135.0
 offset_right = 55.0
 offset_bottom = -108.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_nwl4u")
+metadata/_edit_use_anchors_ = true
 
 [node name="ManaBar" type="ProgressBar" parent="UIAnchor"]
+y_sort_enabled = true
 offset_left = -55.0
 offset_top = -105.0
 offset_right = 55.0
 offset_bottom = -78.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_hj7mx")
+metadata/_edit_use_anchors_ = true
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, 5)
+y_sort_enabled = true
+position = Vector2(9.53674e-06, -62.4998)
 scale = Vector2(0.2, 0.205556)
 sprite_frames = SubResource("SpriteFrames_1oqfe")
 animation = &"Walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-5, 10)
+position = Vector2(1.19209e-06, -17.4999)
+scale = Vector2(0.999999, 0.999999)
 shape = SubResource("RectangleShape2D_e03rg")
 
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+z_index = 1
+position = Vector2(4.03897e-28, -70)
+scale = Vector2(0.999999, 0.999999)
+shape = SubResource("CircleShape2D_s2h3k")
+
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(9.53674e-06, -67.4998)
 zoom = Vector2(5, 5)
 
 [node name="Stats" type="Node" parent="."]
@@ -196,11 +216,15 @@ boulder_shader = "res://Shaders/boulder.tres"
 num_slots = 3
 
 [node name="WeaponHolder" type="Node2D" parent="."]
+position = Vector2(9.53674e-06, -67.4998)
 
 [node name="ApprenticeStaff" parent="WeaponHolder" instance=ExtResource("16_fk68p")]
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="Hotbar" parent="HUD" instance=ExtResource("17_8rva6")]
+offset_top = -13.5
+offset_bottom = -13.5
+metadata/_edit_use_anchors_ = true
 
 [connection signal="animation_finished" from="Sprite" to="." method="_on_sprite_animation_finished"]

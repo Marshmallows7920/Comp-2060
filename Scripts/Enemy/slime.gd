@@ -31,7 +31,7 @@ var tileMap
 
 func _ready():
 	super._ready()
-	closestTileMap()
+	getTileMap()
 	sprite.material = sprite.material.duplicate()
 	sprite.material.set_shader_parameter("custom_time", 1.0)
 
@@ -60,7 +60,7 @@ func _physics_process(delta):
 		"unaware_wander":
 			if prevState != state:
 				if tileMap == null:
-					closestTileMap()
+					getTileMap()
 
 				if tileMap != null:
 					var navCells = tileMap.get_used_cells(0)
@@ -180,14 +180,16 @@ func _physics_process(delta):
 	state = nextState
 
 
-func closestTileMap():
-	tileMaps = get_tree().get_nodes_in_group("TileMap")
+func getTileMap():
+	tileMaps = get_parent().get_children()
 	for map in tileMaps:
-		if tileMap == null:
-			tileMap = map
-		else:
-			if position.distance_to(tileMap.global_position) < position.distance_to(map.global_position):
+		if map.is_in_group("TileMap"):
+			print(map.name)
+			if tileMap == null:
 				tileMap = map
+			else:
+				if global_position.distance_to(tileMap.global_position) > global_position.distance_to(map.global_position):
+					tileMap = map
 	if tileMap != null:
 		print(tileMap.name)
 
