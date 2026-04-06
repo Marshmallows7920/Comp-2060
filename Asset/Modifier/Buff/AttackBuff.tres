@@ -5,10 +5,13 @@
 [resource]
 script = ExtResource("1_ukgfh")
 id = ""
+display_name = "Blessing of Valor"
 hp_bonus = 0
 atk_bonus = 10
 def_bonus = 0
 speed_bonus = 0.0
-duration = 30.0
-tick_interval = 0.0
-hp_per_tick = 0
+hp_per_second = 0
+level = 0
+max_level = 10
+base_price = 10
+price_growth = 0

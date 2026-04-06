@@ -1,10 +1,14 @@
-[gd_scene load_steps=36 format=3 uid="uid://bt22htiyrymw7"]
+[gd_scene load_steps=40 format=3 uid="uid://bt22htiyrymw7"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_t6nyq"]
+[ext_resource type="Resource" uid="uid://cauybcr8mcmtk" path="res://Asset/Modifier/Buff/AttackBuff.tres" id="2_64ajc"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStats.gd" id="2_c4w7p"]
 [ext_resource type="Texture2D" uid="uid://clirhju1cdoit" path="res://Sprites/Player sprite/Slashing/0_Dark_Oracle_Slashing_000.png" id="2_tvde2"]
 [ext_resource type="Texture2D" uid="uid://duodjhvgv186o" path="res://Sprites/Player sprite/Slashing/0_Dark_Oracle_Slashing_011.png" id="3_37li5"]
+[ext_resource type="Resource" uid="uid://chm8fqu76k7ew" path="res://Asset/Modifier/Buff/DefendBuff.tres" id="3_pofpr"]
+[ext_resource type="Resource" uid="uid://ckq4psbsm2dt0" path="res://Asset/Modifier/Buff/Regen.tres" id="4_0abb0"]
 [ext_resource type="Texture2D" uid="uid://dciscfu1js5q8" path="res://Sprites/Player sprite/Slashing/0_Dark_Oracle_Slashing_007.png" id="4_3igoe"]
+[ext_resource type="Resource" uid="uid://cxrx8hxmycpxh" path="res://Asset/Modifier/Buff/SpeedBuff.tres" id="5_3xhx5"]
 [ext_resource type="Texture2D" uid="uid://b7kswibxujdl2" path="res://Sprites/Player sprite/Slashing/0_Dark_Oracle_Slashing_004.png" id="5_uuck7"]
 [ext_resource type="Texture2D" uid="uid://x46mayojgs4m" path="res://Sprites/Player sprite/Slashing/0_Dark_Oracle_Slashing_008.png" id="6_vnura"]
 [ext_resource type="Texture2D" uid="uid://d2glkmqrasv8a" path="res://Sprites/Player sprite/Dying/0_Dark_Oracle_Dying_000.png" id="7_txvyn"]
@@ -148,6 +152,8 @@ script = ExtResource("1_t6nyq")
 settingsMenu = "res://Scenes/Menus/settings_menu.tscn"
 spell_level_up_menu = "res://Scenes/Menus/spell_level_up.tscn"
 normal_dungeon_entrance = "res://Scenes/Levels/normal_dungeon_entrance.tscn"
+shop_scene = "res://Scenes/Menus/Shop.tscn"
+buff_templates = Array[Resource("res://Scripts/Player/StatModifier.gd")]([ExtResource("2_64ajc"), ExtResource("3_pofpr"), ExtResource("4_0abb0"), ExtResource("5_3xhx5")])
 
 [node name="UIAnchor" type="Node2D" parent="."]
 z_index = 100
