@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var num_rooms:int = 5
+@export var num_rooms:int = 3
 @export_file("*.tscn") var room1:String
 @export_file("*.tscn") var room2:String
 
@@ -18,13 +18,13 @@ var all_rooms = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$Player.process_mode = Node.PROCESS_MODE_DISABLED
+	#$Player.process_mode = Node.PROCESS_MODE_DISABLED
 	south_room = set_room()
 	all_rooms.append(south_room)
 	south_room.north_room = self
 	print("%d out of %d rooms added!" % [num_rooms - await south_room.add_rooms(num_rooms-1), num_rooms])
 	add_exit()
-	$Player.process_mode = Node.PROCESS_MODE_INHERIT
+	#$Player.process_mode = Node.PROCESS_MODE_INHERIT
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

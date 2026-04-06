@@ -158,9 +158,7 @@ y_sort_enabled = true
 material = SubResource("ShaderMaterial_bax2g")
 position = Vector2(0, -3)
 sprite_frames = SubResource("SpriteFrames_bukig")
-animation = &"walk_right"
-frame = 3
-frame_progress = 0.442142
+animation = &"attack_1"
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
