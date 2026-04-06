@@ -10,7 +10,7 @@ class_name Enemy
 @export var drop_table: Array[DropEntry] = []
 @export_range(0.0, 100.0, 0.1) var no_drop_rate: float = 100.0
 @export_file("*.tscn") var world_item_scene: String = ""
-
+var is_dead: bool = false
 var stun_timer: float = 0.0
 var current_speed: float = 0.0
 
@@ -59,6 +59,11 @@ func on_hit(attacker: Node = null) -> void:
 
 
 func die(attacker: Node = null) -> void:
+	if is_dead:
+		return
+
+	is_dead = true
+
 	if attacker != null and attacker.has_method("killedEnemy"):
 		attacker.killedEnemy(experience)
 
