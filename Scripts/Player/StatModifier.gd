@@ -9,6 +9,7 @@ class_name StatModifier
 @export var def_bonus: int = 0
 @export var speed_bonus: float = 0.0
 @export var hp_per_second: int = 0
+@export var mana_per_second: int = 0
 
 @export var level: int = 0
 @export var max_level: int = 1
@@ -47,3 +48,7 @@ func scaled_speed_bonus() -> float:
 
 func scaled_hp_per_second() -> int:
 	return hp_per_second * level
+
+
+func scaled_mana_per_second() -> int:
+	return mana_per_second * level

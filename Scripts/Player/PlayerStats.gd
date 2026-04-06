@@ -20,8 +20,8 @@ class_name PlayerStats
 @export var damage_type: String = DamageCalculator.TYPE_MAGIC
 @export var money: int = 0
 
-var current_hp: int
-var current_mana: int
+var current_hp: float
+var current_mana: float
 var modifiers: Array[StatModifier] = []
 
 
@@ -35,6 +35,10 @@ func update_modifiers(delta: float) -> void:
 		var regen_amount: float = modifier.scaled_hp_per_second() * delta
 		if regen_amount != 0.0:
 			current_hp += regen_amount
+
+		var mana_regen_amount: float = modifier.scaled_mana_per_second() * delta
+		if mana_regen_amount != 0.0:
+			current_mana += mana_regen_amount
 
 	current_hp = clamp(current_hp, 0, max_hp())
 	current_mana = clamp(current_mana, 0, max_mana())

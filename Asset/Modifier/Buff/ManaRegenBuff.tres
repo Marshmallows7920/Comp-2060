@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="StatModifier" load_steps=2 format=3 uid="uid://bwhmlq1u10n3v"]
+
+[ext_resource type="Script" path="res://Scripts/Player/StatModifier.gd" id="1_pmghs"]
+
+[resource]
+script = ExtResource("1_pmghs")
+id = ""
+display_name = "Blessing of Ether"
+hp_bonus = 0
+atk_bonus = 0
+def_bonus = 0
+speed_bonus = 0.0
+hp_per_second = 0
+mana_per_second = 5
+level = 0
+max_level = 10
+base_price = 50
+price_growth = 0
