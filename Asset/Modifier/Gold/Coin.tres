@@ -1,9 +1,15 @@
-[gd_resource type="Resource" script_class="MoneyItem" load_steps=2 format=3 uid="uid://bsc67uvyaptcw"]
+[gd_resource type="Resource" script_class="MoneyItem" load_steps=4 format=3 uid="uid://bsc67uvyaptcw"]
 
 [ext_resource type="Script" path="res://Scripts/Item/MoneyItem.gd" id="1_6dkpg"]
+[ext_resource type="Texture2D" uid="uid://dj6s1kojety21" path="res://Sprites/Item/Gold/MonedaD.png" id="2_4ex72"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4y4p7"]
+atlas = ExtResource("2_4ex72")
+region = Rect2(0, 0, 16, 16)
 
 [resource]
 script = ExtResource("1_6dkpg")
 amount = 10
 item_name = ""
 description = ""
+sprite = SubResource("AtlasTexture_4y4p7")

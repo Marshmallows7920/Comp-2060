@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="MoneyItem" load_steps=2 format=3 uid="uid://bq60q0lc6jw23"]
+[gd_resource type="Resource" script_class="MoneyItem" load_steps=3 format=3 uid="uid://bq60q0lc6jw23"]
 
 [ext_resource type="Script" path="res://Scripts/Item/MoneyItem.gd" id="1_wjj88"]
+[ext_resource type="Texture2D" uid="uid://bauiriyaaf48r" path="res://Sprites/Item/Gold/treasure chest0003.png" id="2_tnbd2"]
 
 [resource]
 script = ExtResource("1_wjj88")
 amount = 100
 item_name = ""
 description = ""
+sprite = ExtResource("2_tnbd2")

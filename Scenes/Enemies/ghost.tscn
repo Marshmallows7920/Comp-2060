@@ -1,9 +1,22 @@
-[gd_scene load_steps=29 format=3 uid="uid://ds4k3eqn47g8c"]
+[gd_scene load_steps=34 format=3 uid="uid://ds4k3eqn47g8c"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy/ghost.gd" id="1_4dq66"]
 [ext_resource type="Texture2D" uid="uid://c2xi5gkpjm4j3" path="res://Sprites/Enemies/ghost.png" id="2_dkll5"]
 [ext_resource type="PackedScene" uid="uid://yutpdp1lxdtl" path="res://Scenes/Enemies/ghost_attack_1.tscn" id="2_hs1ee"]
+[ext_resource type="Resource" uid="uid://dchq8t73ohqnw" path="res://Asset/Potion/SHpPotion.tres" id="3_rhe4q"]
 [ext_resource type="Shader" path="res://Shaders/damage_flash.gdshader" id="3_tsg3p"]
+[ext_resource type="Script" path="res://Scripts/Enemy/DropEntry.gd" id="4_fvdq4"]
+[ext_resource type="Resource" uid="uid://bq60q0lc6jw23" path="res://Asset/Modifier/Gold/Treasure.tres" id="5_3yo3b"]
+
+[sub_resource type="Resource" id="Resource_xf5g2"]
+script = ExtResource("4_fvdq4")
+item = ExtResource("3_rhe4q")
+drop_rate = 50.0
+
+[sub_resource type="Resource" id="Resource_vyhe1"]
+script = ExtResource("4_fvdq4")
+item = ExtResource("5_3yo3b")
+drop_rate = 50.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cvd8c"]
 shader = ExtResource("3_tsg3p")
@@ -175,6 +188,9 @@ collision_layer = 2
 collision_mask = 15
 script = ExtResource("1_4dq66")
 attack_1 = ExtResource("2_hs1ee")
+drop_table = Array[ExtResource("4_fvdq4")]([SubResource("Resource_xf5g2"), SubResource("Resource_vyhe1")])
+no_drop_rate = 50.0
+world_item_scene = "res://Scenes/Item/WorldItem.tscn"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_cvd8c")

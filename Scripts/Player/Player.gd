@@ -15,7 +15,8 @@ extends CharacterBody2D
 @onready var hud = $HUD
 @onready var hotbar = $HUD/Hotbar
 @onready var spells = $Spells
-
+@onready var level_label = $HUD/PlayerLevel
+@onready var money_label = $HUD/Gold
 var equipped_weapon: Weapon = null
 var facing_direction: Vector2 = Vector2.RIGHT
 var is_dead: bool = false
@@ -39,6 +40,7 @@ func _ready() -> void:
 		if first_child is Weapon:
 			equipped_weapon = first_child
 	update_ui()
+	update_stat_text() 
 
 
 func _process(delta):
@@ -75,12 +77,14 @@ func _physics_process(delta: float) -> void:
 	
 	movement()
 	attack()
-	item_input()
 	move_and_slide()
 	
 	if stats.is_dead():
 		die()
 
+func update_stat_text() -> void:
+	level_label.text = "Level: " + str(stats.level)
+	money_label.text = "Gold: " + str(stats.money)
 
 func movement() -> void:
 	var direction := Vector2(
@@ -114,17 +118,6 @@ func attack() -> void:
 			anim.flip_h = mouse_dir.x < 0
 
 
-func item_input() -> void:
-	if Input.is_action_just_pressed("UseItem"):
-		inventory.use_current_item(self)
-	
-	if Input.is_action_just_pressed("NextItem"):
-		inventory.next_item()
-	
-	if Input.is_action_just_pressed("PrevItem"):
-		inventory.prev_item()
-
-
 func equip_weapon(new_weapon: Weapon) -> void:
 	if equipped_weapon != null:
 		equipped_weapon.queue_free()
@@ -151,6 +144,7 @@ func add_money(amount: int) -> void:
 	if is_dead:
 		return
 	stats.add_money(amount)
+	update_stat_text() 
 	
 func attacked(amount: int, attack_type: String = DamageCalculator.TYPE_MAGIC) -> void:
 	if is_dead:
@@ -204,6 +198,7 @@ func level_up():
 	var spell_select_menu = load(spell_level_up_menu).instantiate()
 	spell_select_menu.spells = spells
 	hud.add_child(spell_select_menu)
+	update_stat_text() 
 
 func _on_sprite_animation_finished() -> void:
 	if anim.animation == "Attack" and not is_dead:
