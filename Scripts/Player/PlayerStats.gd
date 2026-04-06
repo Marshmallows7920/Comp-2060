@@ -18,6 +18,7 @@ class_name PlayerStats
 @export var atk_growth: int = 3
 
 @export var damage_type: String = DamageCalculator.TYPE_MAGIC
+@export var money: int = 0
 
 var current_hp: int
 var current_mana: int
@@ -144,6 +145,21 @@ func use_mana(amount: int) -> bool:
 	return true
 
 
+func add_money(amount: int) -> void:
+	if amount <= 0:
+		return
+	money += amount
+
+
+func spend_money(amount: int) -> bool:
+	if amount <= 0:
+		return true
+	if money < amount:
+		return false
+	money -= amount
+	return true
+
+
 func take_damage(amount: int, attack_type: String = DamageCalculator.TYPE_MAGIC) -> int:
 	var final_damage: int = DamageCalculator.calculate_damage(amount, def_stat(), attack_type, damage_type)
 	current_hp -= final_damage
@@ -169,3 +185,19 @@ func check_level_up() -> bool:
 		level += 1
 		leveled_up = true
 	return leveled_up
+
+func save_data():
+	GlobalData.level = level
+	GlobalData.exp = experience
+	GlobalData.exp_needed = experience_needed
+	GlobalData.hp = current_hp
+	GlobalData.mana = current_mana
+	GlobalData.money = money
+	
+func load_data():
+	level = GlobalData.level
+	experience = GlobalData.exp
+	experience_needed = GlobalData.exp_needed
+	current_hp = GlobalData.hp
+	current_mana = GlobalData.mana
+	money = GlobalData.money

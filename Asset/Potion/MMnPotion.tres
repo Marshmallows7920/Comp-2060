@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ManaItem" load_steps=4 format=3 uid="uid://dunidiyj2tu4l"]
+
+[ext_resource type="Script" path="res://Scripts/Item/ManaItem.gd" id="1_wxvll"]
+[ext_resource type="Texture2D" uid="uid://bsuci7k4vlixa" path="res://Sprites/Item/Potions/manapotion.png" id="2_j3mw6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_clcqo"]
+atlas = ExtResource("2_j3mw6")
+region = Rect2(17, 0, 16, 16)
+
+[resource]
+script = ExtResource("1_wxvll")
+recover_amount = 50
+item_name = "Small Mana Potion"
+description = ""
+sprite = SubResource("AtlasTexture_clcqo")

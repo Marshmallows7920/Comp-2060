@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="MoneyItem" load_steps=2 format=3 uid="uid://dfwl4cbn2w0or"]
+
+[ext_resource type="Script" path="res://Scripts/Item/MoneyItem.gd" id="1_2iugy"]
+
+[resource]
+script = ExtResource("1_2iugy")
+amount = 50
+item_name = ""
+description = ""

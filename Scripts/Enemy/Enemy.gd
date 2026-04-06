@@ -6,8 +6,10 @@ class_name Enemy
 @export var enemy_type: String = DamageCalculator.TYPE_PHYSIC
 @export var experience: int = 100
 @export var speed: float = 50.0
-@export var drops: Array[Item] = []                          
-@export_file("*.tscn") var world_item_scene: String = ""    
+
+@export var drop_table: Array[DropEntry] = []
+@export_range(0.0, 100.0, 0.1) var no_drop_rate: float = 100.0
+@export_file("*.tscn") var world_item_scene: String = ""
 
 var stun_timer: float = 0.0
 var current_speed: float = 0.0
@@ -59,16 +61,47 @@ func on_hit(attacker: Node = null) -> void:
 func die(attacker: Node = null) -> void:
 	if attacker != null and attacker.has_method("killedEnemy"):
 		attacker.killedEnemy(experience)
-	drop_item()    
+
+	drop_item()
 	queue_free()
 
+
 func drop_item() -> void:
-	if drops.is_empty() or world_item_scene == "":
+	if world_item_scene == "":
 		return
-	var item = drops.pick_random()
-	if item == null:
+
+	var selected_item: Item = roll_drop()
+	if selected_item == null:
 		return
+
 	var world_item = load(world_item_scene).instantiate()
 	world_item.global_position = global_position
 	get_tree().current_scene.add_child(world_item)
-	world_item.setup(item)
+	world_item.setup(selected_item)
+
+
+func roll_drop() -> Item:
+	var total_weight: float = no_drop_rate
+
+	for entry in drop_table:
+		if entry != null and entry.item != null and entry.drop_rate > 0.0:
+			total_weight += entry.drop_rate
+
+	if total_weight <= 0.0:
+		return null
+
+	var roll: float = randf_range(0.0, total_weight)
+	var current: float = no_drop_rate
+
+	if roll < current:
+		return null
+
+	for entry in drop_table:
+		if entry == null or entry.item == null or entry.drop_rate <= 0.0:
+			continue
+
+		current += entry.drop_rate
+		if roll < current:
+			return entry.item
+
+	return null

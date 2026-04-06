@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Game="*res://Scripts/Game.gd"
 Config="*res://Scripts/Config.gd"
+GlobalData="*res://Scripts/Player/GlobalData.gd"
 
 [display]
 

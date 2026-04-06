@@ -22,6 +22,7 @@ var is_dead: bool = false
 
 
 func _ready() -> void:
+	stats.load_data()
 	hotbar.spells = spells
 	spells.num_slots = clampi(spells.num_slots, 0, spells.MAX_SLOTS - 1)
 	spells.slots = []
@@ -146,7 +147,11 @@ func restore_mana(amount: int) -> void:
 	stats.restore_mana(amount)
 	update_ui()
 
-
+func add_money(amount: int) -> void:
+	if is_dead:
+		return
+	stats.add_money(amount)
+	
 func attacked(amount: int, attack_type: String = DamageCalculator.TYPE_MAGIC) -> void:
 	if is_dead:
 		return
@@ -213,4 +218,5 @@ func _on_sprite_animation_changed():
 func next_level():
 	#save variables here to load in next scene
 	print("load next level")
+	stats.save_data()
 	get_tree().change_scene_to_file(normal_dungeon_entrance)
