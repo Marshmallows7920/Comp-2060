@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://dqsyp5lbouwu8"]
+[gd_scene load_steps=3 format=3 uid="uid://dqsyp5lbouwu8"]
 
 [ext_resource type="Script" path="res://Scripts/Menu/Shop.gd" id="1_20pgu"]
+
+[sub_resource type="Theme" id="Theme_a1gft"]
+default_font_size = 32
 
 [node name="Shop" type="Control"]
 layout_mode = 3
@@ -9,6 +12,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_a1gft")
 script = ExtResource("1_20pgu")
 
 [node name="Panel" type="Panel" parent="."]
@@ -40,9 +44,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -589.0
+offset_left = -261.0
 offset_top = -413.0
-offset_right = 589.0
+offset_right = 279.0
 offset_bottom = 413.0
 grow_horizontal = 2
 grow_vertical = 2
