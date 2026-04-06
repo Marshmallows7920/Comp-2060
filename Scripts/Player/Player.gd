@@ -204,8 +204,6 @@ func _on_sprite_animation_finished() -> void:
 	if anim.animation == "Attack" and not is_dead:
 		if velocity != Vector2.ZERO:
 			anim.play("Walk")
-		else:
-			anim.play("idle")
 
 
 func _on_sprite_animation_changed():
