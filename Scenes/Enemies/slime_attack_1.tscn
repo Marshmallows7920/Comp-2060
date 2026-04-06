@@ -190,9 +190,11 @@ _data = {
 }
 
 [node name="SlimeAttack1" type="Area2D" groups=["EnemyAttack"]]
+y_sort_enabled = true
 script = ExtResource("1_ancbb")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_ielic")
 animation = &"attack_1"
 frame = 2
@@ -201,6 +203,7 @@ offset = Vector2(0, -3)
 metadata/_edit_lock_ = true
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
 position = Vector2(0, -3)
 rotation = 3.14159
 sprite_frames = SubResource("SpriteFrames_ielic")

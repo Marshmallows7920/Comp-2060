@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://bt22htiyrymw7"]
+[gd_scene load_steps=36 format=3 uid="uid://bt22htiyrymw7"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_t6nyq"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStats.gd" id="2_c4w7p"]
@@ -140,9 +140,6 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e03rg"]
 size = Vector2(40, 35.0002)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_s2h3k"]
-radius = 48.0
-
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 y_sort_enabled = true
 scale = Vector2(0.2, 0.2)
@@ -150,6 +147,7 @@ collision_mask = 6
 script = ExtResource("1_t6nyq")
 settingsMenu = "res://Scenes/Menus/settings_menu.tscn"
 spell_level_up_menu = "res://Scenes/Menus/spell_level_up.tscn"
+normal_dungeon_entrance = "res://Scenes/Levels/normal_dungeon_entrance.tscn"
 
 [node name="UIAnchor" type="Node2D" parent="."]
 z_index = 100
@@ -186,15 +184,12 @@ position = Vector2(1.19209e-06, -17.4999)
 scale = Vector2(0.999999, 0.999999)
 shape = SubResource("RectangleShape2D_e03rg")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-z_index = 1
-position = Vector2(4.03897e-28, -70)
-scale = Vector2(0.999999, 0.999999)
-shape = SubResource("CircleShape2D_s2h3k")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-20, -35, -35, -45, -40, -65, 40, -65, 35, -45, 20, -35)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(9.53674e-06, -67.4998)
-zoom = Vector2(5, 5)
+zoom = Vector2(4, 4)
 
 [node name="Stats" type="Node" parent="."]
 script = ExtResource("2_c4w7p")

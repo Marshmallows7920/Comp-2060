@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://2th3or655hsc"]
 
-[ext_resource type="Script" path="res://Scenes/Levels/normal_dungeon_room_1.gd" id="1_6ckbh"]
+[ext_resource type="Script" path="res://Scripts/Rooms/normal_dungeon_room_1.gd" id="1_6ckbh"]
 [ext_resource type="TileSet" uid="uid://cdxgaodsdyl51" path="res://Tilesets/dungeon_1.tres" id="1_s2muj"]
 [ext_resource type="Script" path="res://Scripts/tile_map_navigation.gd" id="3_j5s87"]
 [ext_resource type="PackedScene" uid="uid://pjrq1rdub88u" path="res://Scenes/Enemies/ice_slime.tscn" id="3_phv5y"]
@@ -8,12 +8,20 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_usc84"]
 size = Vector2(672, 544)
 
-[node name="NormalDungeonRoom1" type="Area2D"]
+[node name="NormalDungeonRoom1" type="Area2D" groups=["Room"]]
 y_sort_enabled = true
+collision_layer = 16
+collision_mask = 16
 script = ExtResource("1_6ckbh")
+room1 = "res://Scenes/Levels/normal_dungeon_room_1.tscn"
+room2 = "res://Scenes/Levels/normal_dungeon_room_2.tscn"
+exit = "res://Scenes/Levels/normal_dungeon_exit.tscn"
+north_cap = "res://Scenes/Levels/normal_dungeon_north_cap.tscn"
+east_cap = "res://Scenes/Levels/normal_dungeon_east_cap.tscn"
+south_cap = "res://Scenes/Levels/normal_dungeon_south_cap.tscn"
+west_cap = "res://Scenes/Levels/normal_dungeon_west_cap.tscn"
 
-[node name="TileMap" type="TileMap" parent="." groups=["TileMap"]]
-z_as_relative = false
+[node name="Room1" type="TileMap" parent="." groups=["TileMap"]]
 y_sort_enabled = true
 tile_set = ExtResource("1_s2muj")
 format = 2

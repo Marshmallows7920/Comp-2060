@@ -1,13 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://df8sjlem6vt8h"]
+[gd_scene load_steps=5 format=3 uid="uid://df8sjlem6vt8h"]
 
+[ext_resource type="Script" path="res://Scripts/Rooms/normal_dungeon_east_cap.gd" id="1_8clti"]
 [ext_resource type="TileSet" uid="uid://cdxgaodsdyl51" path="res://Tilesets/dungeon_1.tres" id="1_yk1r6"]
 [ext_resource type="Script" path="res://Scripts/tile_map_navigation.gd" id="2_xp6xc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jox6f"]
 size = Vector2(32, 64)
 
-[node name="NormalDungeonEastCap" type="Area2D"]
+[node name="NormalDungeonEastCap" type="Area2D" groups=["EastCap", "Room"]]
 y_sort_enabled = true
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("1_8clti")
 
 [node name="TileMap" type="TileMap" parent="." groups=["TileMap"]]
 y_sort_enabled = true

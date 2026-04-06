@@ -22,7 +22,6 @@ var interestTimer
 @onready var navUpdateTimer = $Navigation/UpdatePathTimer
 @onready var sprite = $AnimatedSprite2D
 
-var tileMaps
 var tileMap
 
 @export var attackPower:float = 5.0
@@ -181,15 +180,15 @@ func _physics_process(delta):
 
 
 func getTileMap():
-	tileMaps = get_parent().get_children()
-	for map in tileMaps:
-		if map.is_in_group("TileMap"):
-			print(map.name)
+	var siblings = get_parent().get_children()
+	for sib in siblings:
+		if sib.is_in_group("TileMap"):
+			#print(sib.name)
 			if tileMap == null:
-				tileMap = map
+				tileMap = sib
 			else:
-				if global_position.distance_to(tileMap.global_position) > global_position.distance_to(map.global_position):
-					tileMap = map
+				if global_position.distance_to(tileMap.global_position) > global_position.distance_to(sib.global_position):
+					tileMap = sib
 	if tileMap != null:
 		print(tileMap.name)
 

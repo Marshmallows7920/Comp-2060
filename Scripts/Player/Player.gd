@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @export_file("*.tscn") var settingsMenu:String
 @export_file("*.tscn") var spell_level_up_menu:String
+@export_file("*.tscn") var normal_dungeon_entrance:String
 
 @onready var weapon_holder: Node2D = $WeaponHolder
 @onready var stats: PlayerStats = $Stats
@@ -209,3 +210,9 @@ func _on_sprite_animation_finished() -> void:
 
 func _on_sprite_animation_changed():
 	pass # Replace with function body.
+
+
+func next_level():
+	#save variables here to load in next scene
+	print("load next level")
+	get_tree().change_scene_to_file(normal_dungeon_entrance)

@@ -143,6 +143,7 @@ radius = 64.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_q8vt6"]
 
 [node name="IceSlime" type="CharacterBody2D" groups=["Enemy"]]
+y_sort_enabled = true
 collision_layer = 2
 collision_mask = 15
 motion_mode = 1
@@ -153,7 +154,7 @@ drops = Array[Resource("res://Scripts/Item/Item.gd")]([ExtResource("3_jj21l"), n
 world_item_scene = "res://Scenes/Item/WorldItem.tscn"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-z_index = 1
+y_sort_enabled = true
 material = SubResource("ShaderMaterial_bax2g")
 position = Vector2(0, -3)
 sprite_frames = SubResource("SpriteFrames_bukig")
@@ -163,7 +164,7 @@ frame_progress = 0.442142
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-z_index = 1
+z_index = -1
 shape = SubResource("CircleShape2D_saqux")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
 metadata/_edit_lock_ = true
@@ -202,7 +203,6 @@ avoidance_enabled = true
 radius = 16.0
 neighbor_distance = 256.0
 max_neighbors = 16
-debug_enabled = true
 
 [node name="UpdatePathTimer" type="Timer" parent="Navigation"]
 wait_time = 0.1

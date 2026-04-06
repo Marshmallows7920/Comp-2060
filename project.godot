@@ -123,8 +123,10 @@ CastSpell={
 2d_physics/layer_2="Enemy"
 2d_physics/layer_3="Obstacles"
 2d_physics/layer_4="Spells"
+2d_physics/layer_5="Rooms"
 
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+environment/defaults/default_clear_color=Color(0.0941176, 0.0784314, 0.145098, 1)
 anti_aliasing/quality/msaa_2d=3

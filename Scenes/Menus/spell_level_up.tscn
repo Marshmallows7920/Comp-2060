@@ -64,10 +64,13 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 10.0
 
 [node name="SpellSelectCard" parent="MarginContainer/VBoxContainer/SpellCardContainer" instance=ExtResource("1_ipd2c")]
+visible = false
 layout_mode = 2
 
 [node name="SpellSelectCard2" parent="MarginContainer/VBoxContainer/SpellCardContainer" instance=ExtResource("1_ipd2c")]
+visible = false
 layout_mode = 2
 
 [node name="SpellSelectCard3" parent="MarginContainer/VBoxContainer/SpellCardContainer" instance=ExtResource("1_ipd2c")]
+visible = false
 layout_mode = 2
