@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://2th3or655hsc"]
+[gd_scene load_steps=7 format=3 uid="uid://2th3or655hsc"]
 
 [ext_resource type="Script" path="res://Scripts/Rooms/normal_dungeon_room_1.gd" id="1_6ckbh"]
 [ext_resource type="TileSet" uid="uid://cdxgaodsdyl51" path="res://Tilesets/dungeon_1.tres" id="1_s2muj"]
 [ext_resource type="Script" path="res://Scripts/tile_map_navigation.gd" id="3_j5s87"]
 [ext_resource type="PackedScene" uid="uid://pjrq1rdub88u" path="res://Scenes/Enemies/ice_slime.tscn" id="3_phv5y"]
+[ext_resource type="PackedScene" uid="uid://ds4k3eqn47g8c" path="res://Scenes/Enemies/ghost.tscn" id="5_o3i5o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_usc84"]
 size = Vector2(672, 544)
@@ -50,28 +51,26 @@ position = Vector2(-336, 0)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_usc84")
 
+[node name="Ghost" parent="." instance=ExtResource("5_o3i5o")]
+position = Vector2(-64, 136)
+
+[node name="Ghost2" parent="." instance=ExtResource("5_o3i5o")]
+position = Vector2(216, 152)
+
+[node name="Ghost3" parent="." instance=ExtResource("5_o3i5o")]
+position = Vector2(-256, -192)
+
 [node name="IceSlime" parent="." instance=ExtResource("3_phv5y")]
-position = Vector2(184, 152)
+position = Vector2(128, -128)
 
 [node name="IceSlime2" parent="." instance=ExtResource("3_phv5y")]
-position = Vector2(-56, 136)
+position = Vector2(-128, 40)
 
 [node name="IceSlime3" parent="." instance=ExtResource("3_phv5y")]
-position = Vector2(112, -128)
+position = Vector2(-280, 216)
 
 [node name="IceSlime4" parent="." instance=ExtResource("3_phv5y")]
-position = Vector2(-264, 72)
+position = Vector2(128, 0)
 
-[node name="IceSlime5" parent="." instance=ExtResource("3_phv5y")]
-position = Vector2(-272, -184)
-
-[node name="IceSlime6" parent="." instance=ExtResource("3_phv5y")]
-position = Vector2(280, -224)
-
-[node name="IceSlime7" parent="." instance=ExtResource("3_phv5y")]
-
-[node name="IceSlime8" parent="." instance=ExtResource("3_phv5y")]
-position = Vector2(-128, -128)
-
-[node name="IceSlime9" parent="." instance=ExtResource("3_phv5y")]
-position = Vector2(288, 224)
+[node name="Ghost4" parent="." instance=ExtResource("5_o3i5o")]
+position = Vector2(288, -224)

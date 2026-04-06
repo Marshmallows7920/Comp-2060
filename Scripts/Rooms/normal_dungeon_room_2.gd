@@ -115,7 +115,7 @@ func add_north_room(num_left) -> int:
 	
 	if num_left <= 0 or overlapping_room != null:
 		if room != null:
-			room.queue_free()
+			await room.queue_free()
 		room = load(north_cap).instantiate()
 		room.set_south_position($North.position)
 		room.entrance = entrance
@@ -126,7 +126,7 @@ func add_north_room(num_left) -> int:
 		
 	if overlapping_room != null:
 		if room != null:
-			room.queue_free()
+			await room.queue_free()
 		room = overlapping_room
 	else:
 		new_rooms.append(room)
@@ -154,7 +154,7 @@ func add_east_room(num_left) -> int:
 	
 	if num_left <= 0 or overlapping_room != null:
 		if room != null:
-			room.queue_free()
+			await room.queue_free()
 		room = load(east_cap).instantiate()
 		room.set_west_position($East.position)
 		room.entrance = entrance
@@ -165,7 +165,7 @@ func add_east_room(num_left) -> int:
 		
 	if overlapping_room != null:
 		if room != null:
-			room.queue_free()
+			await room.queue_free()
 		room = overlapping_room
 	else:
 		new_rooms.append(room)
@@ -193,7 +193,7 @@ func add_west_room(num_left) -> int:
 	
 	if num_left <= 0 or overlapping_room != null:
 		if room != null:
-			room.queue_free()
+			await room.queue_free()
 		room = load(west_cap).instantiate()
 		room.set_east_position($West.position)
 		room.entrance = entrance
@@ -204,7 +204,7 @@ func add_west_room(num_left) -> int:
 		
 	if overlapping_room != null:
 		if room != null:
-			room.queue_free()
+			await room.queue_free()
 		room = overlapping_room
 	else:
 		new_rooms.append(room)

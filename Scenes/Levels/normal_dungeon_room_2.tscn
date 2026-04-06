@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://x0ohc20hasd1"]
+[gd_scene load_steps=7 format=3 uid="uid://x0ohc20hasd1"]
 
 [ext_resource type="Script" path="res://Scripts/Rooms/normal_dungeon_room_2.gd" id="1_iq7qv"]
 [ext_resource type="TileSet" uid="uid://cdxgaodsdyl51" path="res://Tilesets/dungeon_1.tres" id="1_koidr"]
 [ext_resource type="Script" path="res://Scripts/tile_map_navigation.gd" id="2_n62se"]
 [ext_resource type="PackedScene" uid="uid://pjrq1rdub88u" path="res://Scenes/Enemies/ice_slime.tscn" id="4_ray2v"]
+[ext_resource type="PackedScene" uid="uid://ds4k3eqn47g8c" path="res://Scenes/Enemies/ghost.tscn" id="5_hjwy5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_61dnl"]
 size = Vector2(672, 416)
@@ -48,20 +49,22 @@ position = Vector2(-336, 0)
 position = Vector2(0, -64)
 shape = SubResource("RectangleShape2D_61dnl")
 
+[node name="Ghost" parent="." instance=ExtResource("5_hjwy5")]
+position = Vector2(-256, -128)
+
+[node name="Ghost2" parent="." instance=ExtResource("5_hjwy5")]
+position = Vector2(192, -192)
+
 [node name="IceSlime" parent="." instance=ExtResource("4_ray2v")]
-position = Vector2(-208, -216)
+position = Vector2(0, -128)
 
 [node name="IceSlime2" parent="." instance=ExtResource("4_ray2v")]
-position = Vector2(-272, -120)
+position = Vector2(-192, 64)
 
 [node name="IceSlime3" parent="." instance=ExtResource("4_ray2v")]
-position = Vector2(208, -216)
+position = Vector2(192, 64)
+
+[node name="Ghost3" parent="." instance=ExtResource("5_hjwy5")]
 
 [node name="IceSlime4" parent="." instance=ExtResource("4_ray2v")]
-position = Vector2(152, 88)
-
-[node name="IceSlime5" parent="." instance=ExtResource("4_ray2v")]
-position = Vector2(-152, 96)
-
-[node name="IceSlime6" parent="." instance=ExtResource("4_ray2v")]
-position = Vector2(0, -56)
+position = Vector2(-224, -224)
