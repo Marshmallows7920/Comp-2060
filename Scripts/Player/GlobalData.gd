@@ -8,6 +8,10 @@ var hp: int = 50
 var mana: int = 50
 var money: int = 0
 
+var wizard_boss_defeated: bool = false
+var wizard_boss_defeat_count: int = 0
+var game_victory: bool = false
+
 var pending_next_scene: String = ""
 var buffs: Array[StatModifier] = []
 

@@ -6,7 +6,7 @@
 [ext_resource type="Resource" uid="uid://dchq8t73ohqnw" path="res://Asset/Potion/SHpPotion.tres" id="3_rhe4q"]
 [ext_resource type="Shader" path="res://Shaders/damage_flash.gdshader" id="3_tsg3p"]
 [ext_resource type="Script" path="res://Scripts/Enemy/DropEntry.gd" id="4_fvdq4"]
-[ext_resource type="Resource" uid="uid://bq60q0lc6jw23" path="res://Asset/Modifier/Gold/Treasure.tres" id="5_3yo3b"]
+[ext_resource type="Resource" uid="uid://dfwl4cbn2w0or" path="res://Asset/Modifier/Gold/Gem.tres" id="5_phihh"]
 
 [sub_resource type="Resource" id="Resource_xf5g2"]
 script = ExtResource("4_fvdq4")
@@ -15,7 +15,7 @@ drop_rate = 50.0
 
 [sub_resource type="Resource" id="Resource_vyhe1"]
 script = ExtResource("4_fvdq4")
-item = ExtResource("5_3yo3b")
+item = ExtResource("5_phihh")
 drop_rate = 90.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cvd8c"]
@@ -188,6 +188,7 @@ collision_layer = 2
 collision_mask = 15
 script = ExtResource("1_4dq66")
 attack_1 = ExtResource("2_hs1ee")
+enemy_type = "Psychic"
 drop_table = Array[ExtResource("4_fvdq4")]([SubResource("Resource_xf5g2"), SubResource("Resource_vyhe1")])
 no_drop_rate = 10.0
 world_item_scene = "res://Scenes/Item/WorldItem.tscn"

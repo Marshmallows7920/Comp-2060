@@ -20,9 +20,9 @@
 [ext_resource type="Texture2D" uid="uid://dqlhjwok8yot5" path="res://Sprites/Player sprite/Walking/0_Dark_Oracle_Walking_009.png" id="12_fslwu"]
 [ext_resource type="Texture2D" uid="uid://bwrra4mvn2y87" path="res://Sprites/Player sprite/Walking/0_Dark_Oracle_Walking_003.png" id="13_3uyx5"]
 [ext_resource type="Script" path="res://Scripts/Item/Inventory.gd" id="15_g2x1t"]
-[ext_resource type="PackedScene" uid="uid://bt1y6kfs1j0mc" path="res://Scenes/Weapon/ApprenticeStaff.tscn" id="16_fk68p"]
 [ext_resource type="Script" path="res://Scripts/Player/SpellStats.gd" id="16_vvgb8"]
 [ext_resource type="PackedScene" uid="uid://bsdn3mc8tt0ex" path="res://Scenes/Menus/hotbar.tscn" id="17_8rva6"]
+[ext_resource type="PackedScene" uid="uid://cv7ce14ufgfup" path="res://Scenes/Weapon/WoodenStaff.tscn" id="22_meu2n"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nwl4u"]
 bg_color = Color(1, 0, 0, 1)
@@ -220,7 +220,7 @@ num_slots = 3
 [node name="WeaponHolder" type="Node2D" parent="."]
 position = Vector2(9.53674e-06, -67.4998)
 
-[node name="ApprenticeStaff" parent="WeaponHolder" instance=ExtResource("16_fk68p")]
+[node name="WoodenStaff" parent="WeaponHolder" instance=ExtResource("22_meu2n")]
 
 [node name="HUD" type="CanvasLayer" parent="."]
 

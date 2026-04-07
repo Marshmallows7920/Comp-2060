@@ -227,5 +227,6 @@ func _on_sprite_animation_changed():
 
 func next_level():
 	stats.save_data()
+	GlobalData.wizard_boss_defeated = false
 	GlobalData.pending_next_scene = normal_dungeon_entrance
 	get_tree().change_scene_to_file(shop_scene)

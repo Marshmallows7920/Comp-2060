@@ -41,6 +41,12 @@ func add_rooms(num_left) -> int:
 
 
 func _on_exit_area_body_entered(body):
-	if body.is_in_group("Player"):
-		body.next_level()
-		print("PlayerExit")
+	if not body.is_in_group("Player"):
+		return
+
+	if not GlobalData.wizard_boss_defeated:
+		print("Defeat the wizard first")
+		return
+
+	body.next_level()
+	print("PlayerExit")

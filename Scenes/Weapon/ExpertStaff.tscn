@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bt1y6kfs1j0mc"]
+
+[ext_resource type="Script" path="res://Scripts/Weapon/ApprenticeStaff.gd" id="1_ons03"]
+[ext_resource type="PackedScene" uid="uid://cjecpyoxycatb" path="res://Scenes/Weapon/MagicBullet.tscn" id="2_djav1"]
+
+[node name="ApprenticeStaff" type="Node2D"]
+script = ExtResource("1_ons03")
+bullet_scene = ExtResource("2_djav1")
+
+[node name="Muzzle" type="Marker2D" parent="."]
+position = Vector2(1, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]

@@ -11,11 +11,15 @@ func attack(direction: Vector2, base_damage: int, attack_type: String = DamageCa
 
 	start_cooldown()
 
-	var bullet = bullet_scene.instantiate()
-	bullet.global_position = muzzle.global_position + direction.normalized() * 20
-	bullet.direction = direction.normalized()
-	bullet.damage = get_final_damage(base_damage)
-	bullet.attack_type = attack_type
-	bullet.shooter = get_parent().get_parent()
+	var dir = direction.normalized()
+	var side = Vector2(-dir.y, dir.x) * 10.0
+	var spawn_base = muzzle.global_position + dir * 20
 
-	get_tree().current_scene.add_child(bullet)	
+	for offset in [-1, 1]:
+		var bullet = bullet_scene.instantiate()
+		bullet.global_position = spawn_base + side * offset
+		bullet.direction = dir
+		bullet.damage = get_final_damage(base_damage)
+		bullet.attack_type = attack_type
+		bullet.shooter = get_parent().get_parent()
+		get_tree().current_scene.add_child(bullet)

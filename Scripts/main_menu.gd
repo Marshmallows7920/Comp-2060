@@ -14,6 +14,9 @@ func _process(delta):
 
 
 func _on_start_pressed():
+	GlobalData.wizard_boss_defeated = false
+	GlobalData.wizard_boss_defeat_count = 0
+	GlobalData.game_victory = false
 	get_tree().change_scene_to_file(startLevel)
 
 

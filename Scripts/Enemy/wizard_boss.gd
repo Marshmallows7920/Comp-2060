@@ -2,7 +2,8 @@ extends Enemy
 
 @export var attack_1:PackedScene
 @export var attack_2:PackedScene
-
+@export var reward_item_3: Item
+@export var reward_item_5: Item
 var states = ["unaware_idle", "unaware_wander", "chase", "attack_1", "attack_2", "cooldown"]
 var state = "unaware_idle"
 var nextState = "unaware_idle"
@@ -261,3 +262,57 @@ func on_hit(attacker: Node = null) -> void:
 	if attacker != null and attacker.is_in_group("Player"):
 		target = attacker
 		state = "chase"
+		
+func drop_reward(item: Item) -> void:
+	if item == null:
+		return
+	if world_item_scene == null or world_item_scene == "":
+		return
+
+	var world_item = load(world_item_scene).instantiate()
+	world_item.global_position = global_position
+	get_tree().current_scene.add_child(world_item)
+	world_item.setup(item)
+func die(attacker: Node = null) -> void:
+	if is_dead:
+		return
+
+	is_dead = true
+
+	GlobalData.wizard_boss_defeated = true
+	GlobalData.wizard_boss_defeat_count += 1
+
+	if attacker != null and attacker.has_method("killedEnemy"):
+		attacker.killedEnemy(experience)
+
+	var dropped_special_reward := false
+
+	if GlobalData.wizard_boss_defeat_count == 3:
+		drop_reward(reward_item_3)
+		dropped_special_reward = true
+
+	if GlobalData.wizard_boss_defeat_count == 5:
+		drop_reward(reward_item_5)
+		dropped_special_reward = true
+
+	if not dropped_special_reward:
+		drop_item()
+
+	if GlobalData.wizard_boss_defeat_count >= 7:
+		GlobalData.game_victory = true
+		show_victory_text()
+		get_tree().paused = true
+
+	queue_free()
+
+func show_victory_text() -> void:
+	var label := Label.new()
+	label.text = "VICTORY!"
+	label.scale = Vector2(5, 5)
+	label.z_index = 100
+
+	# center on screen
+	var screen_size = get_viewport_rect().size
+	label.position = screen_size / 2 - Vector2(100, 20)
+
+	get_tree().current_scene.add_child(label)

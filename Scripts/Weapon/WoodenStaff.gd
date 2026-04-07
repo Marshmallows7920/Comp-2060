@@ -17,6 +17,6 @@ func attack(direction: Vector2, base_damage: int, attack_type: String = DamageCa
 	bullet.damage = get_final_damage(base_damage)
 	bullet.attack_type = attack_type
 	bullet.shooter = get_parent().get_parent()
-	bullet.speed = 900.0
+	bullet.speed = 400
 
 	get_tree().current_scene.add_child(bullet)

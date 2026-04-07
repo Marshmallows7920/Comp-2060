@@ -1,10 +1,19 @@
-[gd_scene load_steps=41 format=3 uid="uid://d4g20ubr54lyh"]
+[gd_scene load_steps=46 format=3 uid="uid://d4g20ubr54lyh"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy/wizard_boss.gd" id="1_7mj6f"]
 [ext_resource type="Texture2D" uid="uid://24y2oaix1qos" path="res://Sprites/Enemies/wizard.png" id="1_27ooi"]
 [ext_resource type="PackedScene" uid="uid://byfskxdqpn8uo" path="res://Scenes/Enemies/wizard_attack_1.tscn" id="2_vd40u"]
 [ext_resource type="Shader" path="res://Shaders/damage_flash.gdshader" id="2_vriec"]
 [ext_resource type="PackedScene" uid="uid://dpw5hbvmfv5uh" path="res://Scenes/Enemies/wizard_attack_2.tscn" id="3_58bug"]
+[ext_resource type="Resource" uid="uid://bq60q0lc6jw23" path="res://Asset/Modifier/Gold/Treasure.tres" id="4_evyxx"]
+[ext_resource type="Resource" uid="uid://c3m6f6haxt83p" path="res://Asset/Weapon/ExpertStaff.tres" id="4_qfvqj"]
+[ext_resource type="Script" path="res://Scripts/Enemy/DropEntry.gd" id="5_5irhj"]
+[ext_resource type="Resource" uid="uid://beud5i8rn3ccv" path="res://Asset/Weapon/GrandMasterStaff.tres" id="5_yt8s4"]
+
+[sub_resource type="Resource" id="Resource_4qj62"]
+script = ExtResource("5_5irhj")
+item = ExtResource("4_evyxx")
+drop_rate = 100.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_md372"]
 shader = ExtResource("2_vriec")
@@ -263,6 +272,17 @@ collision_mask = 15
 script = ExtResource("1_7mj6f")
 attack_1 = ExtResource("2_vd40u")
 attack_2 = ExtResource("3_58bug")
+reward_item_3 = ExtResource("4_qfvqj")
+reward_item_5 = ExtResource("5_yt8s4")
+attackPower = 50.0
+damageType = "Magic"
+hp = 500
+defense = 5
+enemy_type = ""
+experience = 500
+drop_table = Array[ExtResource("5_5irhj")]([SubResource("Resource_4qj62")])
+no_drop_rate = 0.0
+world_item_scene = "res://Scenes/Item/WorldItem.tscn"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_md372")
