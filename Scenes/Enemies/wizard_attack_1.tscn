@@ -1,0 +1,100 @@
+[gd_scene load_steps=13 format=3 uid="uid://byfskxdqpn8uo"]
+
+[ext_resource type="Script" path="res://Scripts/Enemy/wizard_attack_1.gd" id="1_a68wd"]
+[ext_resource type="Texture2D" uid="uid://24y2oaix1qos" path="res://Sprites/Enemies/wizard.png" id="2_lr5o4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7qaoc"]
+atlas = ExtResource("2_lr5o4")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gf2g5"]
+atlas = ExtResource("2_lr5o4")
+region = Rect2(96, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wjdjf"]
+atlas = ExtResource("2_lr5o4")
+region = Rect2(128, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iyk18"]
+atlas = ExtResource("2_lr5o4")
+region = Rect2(128, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pvbjj"]
+atlas = ExtResource("2_lr5o4")
+region = Rect2(96, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l5kxd"]
+atlas = ExtResource("2_lr5o4")
+region = Rect2(128, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v210c"]
+atlas = ExtResource("2_lr5o4")
+region = Rect2(160, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1whx6"]
+atlas = ExtResource("2_lr5o4")
+region = Rect2(192, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0sq1j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7qaoc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gf2g5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wjdjf")
+}],
+"loop": false,
+"name": &"create",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iyk18")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pvbjj")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l5kxd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v210c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1whx6")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_knrwu"]
+radius = 8.0
+
+[node name="WizardAttack1" type="Area2D"]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_a68wd")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-11, 17)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_0sq1j")
+animation = &"create"
+frame = 2
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_knrwu")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

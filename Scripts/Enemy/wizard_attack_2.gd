@@ -5,7 +5,7 @@ var attackPower
 var damageType
 var direction = Vector2.ZERO
 var target
-@export var speed = 200
+@export var speed = 150
 
 
 func _ready():
@@ -21,7 +21,10 @@ func _ready():
 func _physics_process(delta):
 	if $AnimatedSprite2D.animation == "create":
 		if par != null:
-			position = par.global_position
+			if par.get_node("AnimatedSprite2D").flip_h == true:
+				position = par.get_node("StaffLeft").global_position
+			else:
+				position = par.get_node("StaffRight").global_position
 	elif $AnimatedSprite2D.animation == "fly":
 		rotate(delta*TAU)
 		position += direction * speed * delta
@@ -45,6 +48,19 @@ func _on_body_entered(body):
 		body.attacked(attackPower, damageType)
 		$AnimatedSprite2D.play("hit")
 	if body.is_in_group("TileMap"):
-		print("hit wall")
-		$AnimatedSprite2D.play("hit")
+		var tile_map_coords = body.local_to_map(body.to_local(global_position))
+		print(tile_map_coords)
+		var tile_pos = body.to_global(body.map_to_local(tile_map_coords))
+		print(tile_pos)
+		var normal = (global_position - tile_pos).normalized()
+		print(normal)
+		if abs(normal.x) > abs(normal.y):
+			direction.x *= -1
+		else:
+			direction.y *= -1
+		print("hit wall - bounce")
 
+
+
+func _on_timer_timeout():
+	queue_free()

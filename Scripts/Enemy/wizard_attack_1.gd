@@ -21,7 +21,10 @@ func _ready():
 func _physics_process(delta):
 	if $AnimatedSprite2D.animation == "create":
 		if par != null:
-			position = par.global_position
+			if par.get_node("AnimatedSprite2D").flip_h == true:
+				position = par.get_node("StaffLeft").global_position
+			else:
+				position = par.get_node("StaffRight").global_position
 	elif $AnimatedSprite2D.animation == "fly":
 		rotate(delta*TAU)
 		position += direction * speed * delta
@@ -47,4 +50,3 @@ func _on_body_entered(body):
 	if body.is_in_group("TileMap"):
 		print("hit wall")
 		$AnimatedSprite2D.play("hit")
-

@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://2th3or655hsc"]
+[gd_scene load_steps=8 format=3 uid="uid://2th3or655hsc"]
 
 [ext_resource type="Script" path="res://Scripts/Rooms/normal_dungeon_room_1.gd" id="1_6ckbh"]
 [ext_resource type="TileSet" uid="uid://cdxgaodsdyl51" path="res://Tilesets/dungeon_1.tres" id="1_s2muj"]
 [ext_resource type="Script" path="res://Scripts/tile_map_navigation.gd" id="3_j5s87"]
 [ext_resource type="PackedScene" uid="uid://pjrq1rdub88u" path="res://Scenes/Enemies/ice_slime.tscn" id="3_phv5y"]
 [ext_resource type="PackedScene" uid="uid://ds4k3eqn47g8c" path="res://Scenes/Enemies/ghost.tscn" id="5_o3i5o"]
+[ext_resource type="PackedScene" uid="uid://d4g20ubr54lyh" path="res://Scenes/Enemies/wizard_boss.tscn" id="6_8pnly"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_usc84"]
 size = Vector2(672, 544)
@@ -74,3 +75,6 @@ position = Vector2(128, 0)
 
 [node name="Ghost4" parent="." instance=ExtResource("5_o3i5o")]
 position = Vector2(288, -224)
+
+[node name="WizardBoss" parent="." instance=ExtResource("6_8pnly")]
+position = Vector2(-56, -8)

@@ -1,0 +1,100 @@
+[gd_resource type="VisualShader" load_steps=9 format=3 uid="uid://tvwkg4urs7rd"]
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_df3bv"]
+default_input_values = [0, 0.0, 1, 2.0]
+operator = 3
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_gmmdt"]
+expanded_output_ports = [0]
+input_name = "color"
+
+[sub_resource type="VisualShaderNodeVectorCompose" id="VisualShaderNodeVectorCompose_wwepy"]
+default_input_values = [0, 0.0, 1, 0.0, 2, 0.0, 3, 0.0]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_02kgh"]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_gyf14"]
+operator = 2
+
+[sub_resource type="VisualShaderNodeFloatFunc" id="VisualShaderNodeFloatFunc_qp7q4"]
+function = 0
+
+[sub_resource type="VisualShaderNodeFloatFunc" id="VisualShaderNodeFloatFunc_b8mgp"]
+function = 0
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_1qfl8"]
+operator = 2
+
+[resource]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+
+
+
+void fragment() {
+// Input:2
+	vec4 n_out2p0 = COLOR;
+	float n_out2p1 = n_out2p0.r;
+	float n_out2p2 = n_out2p0.g;
+	float n_out2p3 = n_out2p0.b;
+	float n_out2p4 = n_out2p0.a;
+
+
+// Input:4
+	float n_out4p0 = TIME;
+
+
+// FloatOp:6
+	float n_out6p0 = n_out2p3 * n_out4p0;
+
+
+// FloatFunc:7
+	float n_out7p0 = sin(n_out6p0);
+
+
+// FloatOp:9
+	float n_out9p0 = n_out2p1 * n_out4p0;
+
+
+// FloatOp:10
+	float n_in10p1 = 2.00000;
+	float n_out10p0 = n_out9p0 / n_in10p1;
+
+
+// FloatFunc:8
+	float n_out8p0 = sin(n_out10p0);
+
+
+// VectorCompose:3
+	vec3 n_out3p0 = vec3(n_out7p0, n_out2p2, n_out8p0);
+
+
+// Output:0
+	COLOR.rgb = n_out3p0;
+	COLOR.a = n_out2p4;
+
+
+}
+"
+graph_offset = Vector2(-513.301, 3.41057)
+mode = 1
+flags/light_only = false
+nodes/fragment/2/node = SubResource("VisualShaderNodeInput_gmmdt")
+nodes/fragment/2/position = Vector2(-720, 140)
+nodes/fragment/3/node = SubResource("VisualShaderNodeVectorCompose_wwepy")
+nodes/fragment/3/position = Vector2(240, 80)
+nodes/fragment/4/node = SubResource("VisualShaderNodeInput_02kgh")
+nodes/fragment/4/position = Vector2(-720, 320)
+nodes/fragment/6/node = SubResource("VisualShaderNodeFloatOp_gyf14")
+nodes/fragment/6/position = Vector2(-300, 40)
+nodes/fragment/7/node = SubResource("VisualShaderNodeFloatFunc_qp7q4")
+nodes/fragment/7/position = Vector2(-100, 60)
+nodes/fragment/8/node = SubResource("VisualShaderNodeFloatFunc_b8mgp")
+nodes/fragment/8/position = Vector2(0, 260)
+nodes/fragment/9/node = SubResource("VisualShaderNodeFloatOp_1qfl8")
+nodes/fragment/9/position = Vector2(-320, 260)
+nodes/fragment/10/node = SubResource("VisualShaderNodeFloatOp_df3bv")
+nodes/fragment/10/position = Vector2(-160, 260)
+nodes/fragment/connections = PackedInt32Array(3, 0, 0, 0, 2, 4, 0, 1, 4, 0, 6, 1, 2, 3, 6, 0, 6, 0, 7, 0, 7, 0, 3, 0, 2, 1, 9, 0, 4, 0, 9, 1, 8, 0, 3, 2, 9, 0, 10, 0, 10, 0, 8, 0, 2, 2, 3, 1)
