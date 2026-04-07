@@ -50,8 +50,12 @@ func set_west_position(pos):
 
 func overlapping() -> Area2D:
 	var overlap_room = null
+	if not is_node_ready():
+		await ready
+	translate(Vector2.ZERO)
 	await get_tree().physics_frame
 	if has_overlapping_areas():
+		print("OVERLAP!")
 		var areas = get_overlapping_areas()
 		for a in areas:
 			if a.is_in_group("Room"):
@@ -110,30 +114,32 @@ func add_north_room(num_left) -> int:
 		room.entrance = entrance
 		room.par = self
 		add_child(room)
+		await get_tree().physics_frame
 		overlapping_room = await room.overlapping()
 		change = -1
-	
+		print("%s overlap with %s" % [room, overlapping_room])
 	if num_left <= 0 or overlapping_room != null:
 		if room != null:
-			await room.queue_free()
+			room.free()
 		room = load(north_cap).instantiate()
 		room.set_south_position($North.position)
 		room.entrance = entrance
 		room.par = self
 		add_child(room)
+		await get_tree().physics_frame
 		overlapping_room = await room.overlapping()
 		change = 0
-		
+	print("%s overlap with %s" % [room, overlapping_room])
 	if overlapping_room != null:
 		if room != null:
-			await room.queue_free()
+			room.free()
 		room = overlapping_room
 	else:
 		new_rooms.append(room)
 		entrance.all_rooms.append(room)
 	
 	north_room = room
-	north_room.south_room = self
+	#north_room.south_room = self
 	return change
 
 
@@ -149,23 +155,25 @@ func add_east_room(num_left) -> int:
 		room.entrance = entrance
 		room.par = self
 		add_child(room)
+		await get_tree().physics_frame
 		overlapping_room = await room.overlapping()
 		change = -1
-	
+		print("%s overlap with %s" % [room, overlapping_room])
 	if num_left <= 0 or overlapping_room != null:
 		if room != null:
-			await room.queue_free()
+			room.free()
 		room = load(east_cap).instantiate()
 		room.set_west_position($East.position)
 		room.entrance = entrance
 		room.par = self
 		add_child(room)
+		await get_tree().physics_frame
 		overlapping_room = await room.overlapping()
 		change = 0
-		
+	print("%s overlap with %s" % [room, overlapping_room])
 	if overlapping_room != null:
 		if room != null:
-			await room.queue_free()
+			room.free()
 		room = overlapping_room
 	else:
 		new_rooms.append(room)
@@ -188,23 +196,25 @@ func add_west_room(num_left) -> int:
 		room.entrance = entrance
 		room.par = self
 		add_child(room)
+		await get_tree().physics_frame
 		overlapping_room = await room.overlapping()
 		change = -1
-	
+		print("%s overlap with %s" % [room, overlapping_room])
 	if num_left <= 0 or overlapping_room != null:
 		if room != null:
-			await room.queue_free()
+			room.free()
 		room = load(west_cap).instantiate()
 		room.set_east_position($West.position)
 		room.entrance = entrance
 		room.par = self
 		add_child(room)
+		await get_tree().physics_frame
 		overlapping_room = await room.overlapping()
 		change = 0
-		
+	print("%s overlap with %s" % [room, overlapping_room])
 	if overlapping_room != null:
 		if room != null:
-			await room.queue_free()
+			room.free()
 		room = overlapping_room
 	else:
 		new_rooms.append(room)

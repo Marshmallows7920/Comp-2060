@@ -22,8 +22,12 @@ func set_west_position(pos):
 
 func overlapping() -> Area2D:
 	var overlap_room = null
-	get_tree().physics_frame
+	if not is_node_ready():
+		await ready
+	translate(Vector2.ZERO)
+	await get_tree().physics_frame
 	if has_overlapping_areas():
+		print("OVERLAP!")
 		var areas = get_overlapping_areas()
 		for a in areas:
 			if a.is_in_group("Room"):

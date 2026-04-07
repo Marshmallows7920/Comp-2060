@@ -23,7 +23,7 @@ func _physics_process(delta):
 		if par != null:
 			position = par.global_position
 	elif $AnimatedSprite2D.animation == "fly":
-		rotate(delta*TAU/32)
+		rotate(delta*TAU)
 		position += direction * speed * delta
 		
 		

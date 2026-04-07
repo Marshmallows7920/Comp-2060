@@ -67,7 +67,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"fly",
-"speed": 2.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -94,7 +94,7 @@ script = ExtResource("1_pwn7v")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_cgxr8")
-animation = &"hit"
+animation = &"fly"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 0)
