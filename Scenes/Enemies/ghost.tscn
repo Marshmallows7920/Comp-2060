@@ -16,7 +16,7 @@ drop_rate = 50.0
 [sub_resource type="Resource" id="Resource_vyhe1"]
 script = ExtResource("4_fvdq4")
 item = ExtResource("5_3yo3b")
-drop_rate = 50.0
+drop_rate = 90.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cvd8c"]
 shader = ExtResource("3_tsg3p")
@@ -189,7 +189,7 @@ collision_mask = 15
 script = ExtResource("1_4dq66")
 attack_1 = ExtResource("2_hs1ee")
 drop_table = Array[ExtResource("4_fvdq4")]([SubResource("Resource_xf5g2"), SubResource("Resource_vyhe1")])
-no_drop_rate = 50.0
+no_drop_rate = 10.0
 world_item_scene = "res://Scenes/Item/WorldItem.tscn"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

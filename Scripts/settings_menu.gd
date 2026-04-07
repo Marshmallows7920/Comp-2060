@@ -39,9 +39,6 @@ func _process(delta):
 	pass
 
 
-
-# ========== SIGNAL FUNCTIONS ==========
-
 func _on_quit_pressed():
 	get_tree().quit()
 
@@ -122,9 +119,6 @@ func _on_back_pressed():
 	get_tree().paused = false
 	queue_free()
 
-
-
-# ========== FUNCTIONS ==========
 
 func setUINodeVariables():
 	tabContainer = $MarginContainer/VBoxContainer/TabContainer

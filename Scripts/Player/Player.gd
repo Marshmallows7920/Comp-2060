@@ -1,8 +1,11 @@
 extends CharacterBody2D
 
-@export_file("*.tscn") var settingsMenu:String
-@export_file("*.tscn") var spell_level_up_menu:String
-@export_file("*.tscn") var normal_dungeon_entrance:String
+@export_file("*.tscn") var settingsMenu: String
+@export_file("*.tscn") var spell_level_up_menu: String
+@export_file("*.tscn") var normal_dungeon_entrance: String
+@export_file("*.tscn") var shop_scene: String
+
+@export var buff_templates: Array[StatModifier] = []
 
 @onready var weapon_holder: Node2D = $WeaponHolder
 @onready var stats: PlayerStats = $Stats
@@ -17,30 +20,37 @@ extends CharacterBody2D
 @onready var spells = $Spells
 @onready var level_label = $HUD/PlayerLevel
 @onready var money_label = $HUD/Gold
+
 var equipped_weapon: Weapon = null
 var facing_direction: Vector2 = Vector2.RIGHT
 var is_dead: bool = false
 
 
 func _ready() -> void:
+	GlobalData.initialize_buffs(buff_templates)
+
 	stats.load_data()
+
 	hotbar.spells = spells
 	spells.num_slots = clampi(spells.num_slots, 0, spells.MAX_SLOTS - 1)
 	spells.slots = []
 	spells.cooldowns = []
+
 	for i in range(0, spells.MAX_SLOTS):
 		spells.slots.append("")
 		spells.cooldowns.append(0.0)
-	spells.selected = clampi(spells.selected, 0, spells.num_slots - 1)
+
+	spells.selected = clampi(spells.selected, 0, max(spells.num_slots, 1) - 1)
 	level_up()
 	hotbar.update(spells.num_slots, spells.slots, spells.selected)
-	
+
 	if weapon_holder.get_child_count() > 0:
 		var first_child: Node = weapon_holder.get_child(0)
 		if first_child is Weapon:
 			equipped_weapon = first_child
+
 	update_ui()
-	update_stat_text() 
+	update_stat_text()
 
 
 func _process(delta):
@@ -48,20 +58,20 @@ func _process(delta):
 		if Input.is_action_just_pressed("Slot" + str(i + 1)):
 			if spells.num_slots >= i:
 				spells.selected = i
-	
+
 	if Input.is_action_just_pressed("NextSlot"):
 		spells.selected = wrapi(spells.selected + 1, 0, spells.num_slots)
 	elif Input.is_action_just_pressed("PrevSlot"):
 		spells.selected = wrapi(spells.selected - 1, 0, spells.num_slots)
-	
+
 	for i in range(0, spells.cooldowns.size()):
 		spells.cooldowns[i] = max(spells.cooldowns[i] - delta, 0.0)
-	
+
 	hotbar.update(spells.num_slots, spells.slots, spells.selected)
-	
+
 	if Input.is_action_just_pressed("CastSpell"):
 		SpellCaster.cast_spell(self, spells, stats)
-	
+
 	if Input.is_action_just_pressed("Escape"):
 		get_tree().paused = true
 		var settings = load(settingsMenu).instantiate()
@@ -71,39 +81,41 @@ func _process(delta):
 func _physics_process(delta: float) -> void:
 	if is_dead:
 		return
-	
+
 	stats.update_modifiers(delta)
 	update_ui()
-	
+
 	movement()
 	attack()
 	move_and_slide()
-	
+
 	if stats.is_dead():
 		die()
+
 
 func update_stat_text() -> void:
 	level_label.text = "Level: " + str(stats.level)
 	money_label.text = "Gold: " + str(stats.money)
+
 
 func movement() -> void:
 	var direction := Vector2(
 		Input.get_action_strength("MoveRight") - Input.get_action_strength("MoveLeft"),
 		Input.get_action_strength("MoveDown") - Input.get_action_strength("MoveUp")
 	).normalized()
-	
+
 	if direction != Vector2.ZERO:
 		facing_direction = direction
-	
+
 		if anim.animation != "Attack":
 			anim.play("Walk")
-	
+
 		if facing_direction.x != 0:
 			anim.flip_h = facing_direction.x < 0
 	else:
 		if anim.animation == "Walk":
 			anim.stop()
-	
+
 	velocity = direction * stats.move_speed()
 
 
@@ -111,7 +123,7 @@ func attack() -> void:
 	if Input.is_action_just_pressed("Attack") and equipped_weapon != null:
 		var mouse_dir = (get_global_mouse_position() - global_position).normalized()
 		equipped_weapon.attack(mouse_dir, stats.atk_stat(), stats.damage_type)
-		
+
 		anim.play("Attack")
 
 		if mouse_dir.x != 0:
@@ -121,7 +133,7 @@ func attack() -> void:
 func equip_weapon(new_weapon: Weapon) -> void:
 	if equipped_weapon != null:
 		equipped_weapon.queue_free()
-	
+
 	weapon_holder.add_child(new_weapon)
 	new_weapon.position = Vector2.ZERO
 	equipped_weapon = new_weapon
@@ -140,19 +152,21 @@ func restore_mana(amount: int) -> void:
 	stats.restore_mana(amount)
 	update_ui()
 
+
 func add_money(amount: int) -> void:
 	if is_dead:
 		return
 	stats.add_money(amount)
-	update_stat_text() 
-	
+	update_stat_text()
+
+
 func attacked(amount: int, attack_type: String = DamageCalculator.TYPE_MAGIC) -> void:
 	if is_dead:
 		return
-	
+
 	stats.take_damage(amount, attack_type)
 	update_ui()
-	
+
 	if stats.is_dead():
 		die()
 
@@ -170,7 +184,7 @@ func remove_modifier(modifier_id: String) -> void:
 func update_ui() -> void:
 	hp_bar.max_value = stats.max_hp()
 	hp_bar.value = stats.current_hp
-	
+
 	mana_bar.max_value = stats.max_mana()
 	mana_bar.value = stats.current_mana
 
@@ -178,12 +192,12 @@ func update_ui() -> void:
 func die() -> void:
 	if is_dead:
 		return
-	
+
 	is_dead = true
 	velocity = Vector2.ZERO
 	anim.play("Die")
 	await anim.animation_finished
-	
+
 	var last_frame = anim.sprite_frames.get_frame_count("Die") - 1
 	anim.frame = last_frame
 	anim.pause()
@@ -198,7 +212,8 @@ func level_up():
 	var spell_select_menu = load(spell_level_up_menu).instantiate()
 	spell_select_menu.spells = spells
 	hud.add_child(spell_select_menu)
-	update_stat_text() 
+	update_stat_text()
+
 
 func _on_sprite_animation_finished() -> void:
 	if anim.animation == "Attack" and not is_dead:
@@ -207,11 +222,10 @@ func _on_sprite_animation_finished() -> void:
 
 
 func _on_sprite_animation_changed():
-	pass # Replace with function body.
+	pass
 
 
 func next_level():
-	#save variables here to load in next scene
-	print("load next level")
 	stats.save_data()
-	get_tree().change_scene_to_file(normal_dungeon_entrance)
+	GlobalData.pending_next_scene = normal_dungeon_entrance
+	get_tree().change_scene_to_file(shop_scene)

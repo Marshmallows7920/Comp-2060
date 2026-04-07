@@ -3,8 +3,8 @@ class_name PlayerStats
 
 @export var level: int = 1
 @export var experience: int = 0
-@export var experience_needed:int = 100
-@export var experience_step:int = 100
+@export var experience_needed: int = 100
+@export var experience_step: int = 100
 
 @export var base_hp: int = 50
 @export var base_mana: int = 50
@@ -20,8 +20,8 @@ class_name PlayerStats
 @export var damage_type: String = DamageCalculator.TYPE_MAGIC
 @export var money: int = 0
 
-var current_hp: int
-var current_mana: int
+var current_hp: float
+var current_mana: float
 var modifiers: Array[StatModifier] = []
 
 
@@ -31,30 +31,24 @@ func _ready() -> void:
 
 
 func update_modifiers(delta: float) -> void:
-	for i in range(modifiers.size() - 1, -1, -1):
-		var modifier: StatModifier = modifiers[i]
+	for modifier in modifiers:
+		var regen_amount: float = modifier.scaled_hp_per_second() * delta
+		if regen_amount != 0.0:
+			current_hp += regen_amount
 
-		if modifier.hp_per_second != 0:
-			current_hp += modifier.hp_per_second * delta
-			current_hp = clamp(current_hp, 0, max_hp())
+		var mana_regen_amount: float = modifier.scaled_mana_per_second() * delta
+		if mana_regen_amount != 0.0:
+			current_mana += mana_regen_amount
 
-		if modifier.duration > 0:
-			modifier.time_left -= delta
-			if modifier.time_left <= 0:
-				modifiers.remove_at(i)
-
-	current_hp = min(current_hp, max_hp())
-	current_mana = min(current_mana, max_mana())
+	current_hp = clamp(current_hp, 0, max_hp())
+	current_mana = clamp(current_mana, 0, max_mana())
 
 
 func add_modifier(modifier: StatModifier) -> void:
 	if modifier == null:
 		return
 
-	var new_modifier: StatModifier = modifier.duplicate()
-	new_modifier.setup()
-	modifiers.append(new_modifier)
-
+	modifiers.append(modifier)
 	current_hp = min(current_hp, max_hp())
 	current_mana = min(current_mana, max_mana())
 
@@ -68,31 +62,45 @@ func remove_modifier(modifier_id: String) -> void:
 	current_mana = min(current_mana, max_mana())
 
 
+func set_saved_buffs(buff_list: Array[StatModifier]) -> void:
+	modifiers.clear()
+
+	for buff in buff_list:
+		if buff == null:
+			continue
+
+		var buff_copy: StatModifier = buff.duplicate(true)
+		modifiers.append(buff_copy)
+
+	current_hp = min(current_hp, max_hp())
+	current_mana = min(current_mana, max_mana())
+
+
 func get_hp_bonus() -> int:
 	var total: int = 0
 	for modifier in modifiers:
-		total += modifier.hp_bonus
+		total += modifier.scaled_hp_bonus()
 	return total
 
 
 func get_atk_bonus() -> int:
 	var total: int = 0
 	for modifier in modifiers:
-		total += modifier.atk_bonus
+		total += modifier.scaled_atk_bonus()
 	return total
 
 
 func get_def_bonus() -> int:
 	var total: int = 0
 	for modifier in modifiers:
-		total += modifier.def_bonus
+		total += modifier.scaled_def_bonus()
 	return total
 
 
 func get_speed_bonus() -> float:
 	var total: float = 0.0
 	for modifier in modifiers:
-		total += modifier.speed_bonus
+		total += modifier.scaled_speed_bonus()
 	return total
 
 
@@ -171,14 +179,14 @@ func is_dead() -> bool:
 	return current_hp <= 0
 
 
-func exp_gained(amount:int):
+func exp_gained(amount: int) -> void:
 	experience += amount
 	while check_level_up():
 		get_parent().level_up()
 
 
 func check_level_up() -> bool:
-	var leveled_up = false
+	var leveled_up := false
 	if experience >= experience_needed:
 		experience -= experience_needed
 		experience_needed += experience_step
@@ -186,18 +194,22 @@ func check_level_up() -> bool:
 		leveled_up = true
 	return leveled_up
 
-func save_data():
+
+func save_data() -> void:
 	GlobalData.level = level
 	GlobalData.exp = experience
 	GlobalData.exp_needed = experience_needed
 	GlobalData.hp = current_hp
 	GlobalData.mana = current_mana
 	GlobalData.money = money
-	
-func load_data():
+	GlobalData.save_buffs(modifiers)
+
+
+func load_data() -> void:
 	level = GlobalData.level
 	experience = GlobalData.exp
 	experience_needed = GlobalData.exp_needed
 	current_hp = GlobalData.hp
 	current_mana = GlobalData.mana
 	money = GlobalData.money
+	set_saved_buffs(GlobalData.buffs)
