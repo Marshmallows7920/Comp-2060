@@ -24,10 +24,10 @@ func refresh_ui():
 		row.get_child(0).text = buff.display_name
 
 		row.add_child(Label.new())
-		row.get_child(1).text = "Lv " + str(buff.level) +"/"
+		row.get_child(1).text = "Lv " + str(buff.level)
 
 		row.add_child(Label.new())
-		row.get_child(2).text = str(buff.get_price()) if buff.can_level_up() else "MAX"
+		row.get_child(2).text = "Price:"+ str(buff.get_price()) if buff.can_level_up() else "MAX"
 
 		var btn = Button.new()
 		btn.text = "Buy"
